@@ -29,6 +29,7 @@ export PATH=$PATH:/usr/local/rvm/gems/ruby-2.0.0-p247/bin:/usr/local/rvm/gems/ru
 # My Aliases
 alias home="cd ~/"
 alias dotfiles="cd ~/dotfiles"
+alias rs="rspec"
 
 # Custom Functions
 # Start puma on port 3000
