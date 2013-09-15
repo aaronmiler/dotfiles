@@ -38,8 +38,17 @@ function server() {
 }
 # This is where I typically put my private projects
 function personal(){
-  cd ~/Documents/Projects/$1
+  if [ ! -z $2 ]; then
+    cd ~/Documents/Projects/$1/$2
+  else
+    cd ~/Documents/Projects/$1
+  fi
 }
+# For jekyll/octopress sites
+function sites(){
+  cd ~/Documents/Projects/Sites/$1
+}
+
 # Where my work projects go
 function work(){
   cd ~/Documents/Work/$1
