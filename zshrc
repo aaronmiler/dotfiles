@@ -57,3 +57,7 @@ function work(){
 function new_app(){
   rails new $1 -m https://gist.github.com/aaronmiler/5719303/raw/template.rb
 }
+# Push Specified Branch to Heroku as Master
+function gph(){
+  git push heroku $1:master -f
+}
