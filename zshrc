@@ -23,8 +23,12 @@ COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=$PATH:/usr/local/rvm/gems/ruby-2.0.0-p247/bin:/usr/local/rvm/gems/ruby-2.0.0-p247@global/bin:/usr/local/rvm/rubies/ruby-2.0.0-p247/bin:/usr/local/rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin
+# RB Env
+PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# NPM Bin Path
+export PATH=/usr/local/bin/npm:$PATH
 
 # My Aliases
 alias home="cd ~/"
