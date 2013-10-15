@@ -63,5 +63,9 @@ function new_app(){
 }
 # Push Specified Branch to Heroku as Master
 function gph(){
+  branchName=`git symbolic-ref -q --short HEAD`
+  git checkout $1
+  git rebase $branchName
   git push heroku $1:master -f
+  git checkout $branchName
 }
