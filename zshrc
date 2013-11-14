@@ -35,11 +35,10 @@ alias home="cd ~/"
 alias dotfiles="cd ~/dotfiles"
 alias rs="rspec"
 
+# -----------------------------------------
 # Custom Functions
-# Start puma on port 3000
-function server() {
-   puma -p 3000
-}
+# -----------------------------------------
+
 # This is where I typically put my private projects
 function personal(){
   if [ ! -z $2 ]; then
@@ -56,11 +55,13 @@ function sites(){
 # Where my work projects go
 function work(){
   cd ~/Documents/Work/$1
+  git fetch origin
 }
 # Create a new app based on my template file Gist
 function new_app(){
   rails new $1 -m https://gist.github.com/aaronmiler/5719303/raw/template.rb
 }
+
 # Push Specified Branch to Heroku as Master
 function gph(){
   branchName=`git symbolic-ref -q --short HEAD`
@@ -68,4 +69,13 @@ function gph(){
   git rebase $branchName
   git push heroku $1:master -f
   git checkout $branchName
+}
+
+# -----------------------------------------
+# Alias' for Work
+# -----------------------------------------
+
+function smdb(){
+  cd ~/Documents/Work/web/tmp
+  mongod --dbpath=.
 }
