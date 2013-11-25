@@ -34,11 +34,16 @@ export PATH=/usr/local/bin/npm:$PATH
 alias home="cd ~/"
 alias dotfiles="cd ~/dotfiles"
 alias rs="rspec"
+alias h="history | grep"
 
 # -----------------------------------------
 # Custom Functions
 # -----------------------------------------
 
+# Get top 20 commands
+function top20(){
+  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -20
+}
 # This is where I typically put my private projects
 function personal(){
   if [ ! -z $2 ]; then

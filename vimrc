@@ -155,6 +155,19 @@ map Y y$
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
+" Remap JJ to leave insert mode
+imap jj <ESC>
+
+" Don't use the arrow keys
+noremap <up>    :echoerr 'USE K TO GO UP'<CR>
+noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
+noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
+noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
+
+" Control S to save
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR>
 
 
 "------------------------------------------------------------
