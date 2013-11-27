@@ -124,7 +124,7 @@ set tabstop=2
 map Y y$
 
 " Remap JJ to leave insert mode
-imap jj <ESC>
+imap jk <ESC>
 
 " Don't use the arrow keys
 noremap <up>    :echoerr 'USE K TO GO UP'<CR>
