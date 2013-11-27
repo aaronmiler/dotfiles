@@ -23,6 +23,10 @@ COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
 
+# Putting these here in hopes I can Cmd-S to save in vim
+bind -r '\C-s'
+stty -ixon
+
 # RB Env
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -35,6 +39,7 @@ alias home="cd ~/"
 alias dotfiles="cd ~/dotfiles"
 alias rs="rspec"
 alias h="history | grep"
+alias v="vim"
 
 # -----------------------------------------
 # Custom Functions
