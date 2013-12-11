@@ -24,7 +24,6 @@ COMPLETION_WAITING_DOTS="true"
 source $ZSH/oh-my-zsh.sh
 
 # Putting these here in hopes I can Cmd-S to save in vim
-bind -r '\C-s'
 stty -ixon
 
 # RB Env
