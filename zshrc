@@ -23,8 +23,11 @@ COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
 
-# Putting these here in hopes I can Cmd-S to save in vim
+# Putting these here so I can Control-S to save in vim
 stty -ixon
+
+#Heroku
+export PATH="/usr/local/heroku/bin:$PATH"
 
 # RB Env
 PATH="$HOME/.rbenv/bin:$PATH"
@@ -64,7 +67,9 @@ function sites(){
 # Where my work projects go
 function work(){
   cd ~/Documents/Work/$1
-  git fetch origin
+  if [ $1 ]; then
+    git fetch origin
+  fi
 }
 # Create a new app based on my template file Gist
 function new_app(){
