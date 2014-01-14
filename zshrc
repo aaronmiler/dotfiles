@@ -58,7 +58,7 @@ function top20(){
 
 # Quick Commit
 function gcm(){
- git commit -m '$1'
+ git commit -m $1
 }
 # Git Push (Current Branch) Origin
 function gpo(){
