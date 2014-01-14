@@ -60,6 +60,11 @@ function top20(){
 function gcm(){
  git commit -m '$1'
 }
+# Git Push (Current Branch) Origin
+function gpo(){
+  branch=`git symbolic-ref -q --short HEAD`
+  git push origin $branch
+}
 # This is where I typically put my private projects
 function personal(){
   if [ ! -z $2 ]; then
