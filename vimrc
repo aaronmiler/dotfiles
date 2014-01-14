@@ -113,8 +113,10 @@ set expandtab
 set tabstop=2
 
 "-----------------------------------------------------------
-" Execute Stuff
+" Leader
+let mapleader = ","
 
+map <Leader>p :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 
 "------------------------------------------------------------
 " Mappings
@@ -123,7 +125,7 @@ set tabstop=2
 " which is the default
 map Y y$
 
-" Remap JJ to leave insert mode
+" Remap jk to leave insert mode
 imap jk <ESC>
 
 " Don't use the arrow keys
