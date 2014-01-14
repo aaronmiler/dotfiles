@@ -46,6 +46,7 @@ alias v="vim"
 # Manual Git Shortcuts
 alias gst="git status"
 alias ga="git add"
+alias gcm="git commit -m"
 
 # -----------------------------------------
 # Custom Functions
@@ -56,10 +57,6 @@ function top20(){
   history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -20
 }
 
-# Quick Commit
-function gcm(){
- git commit -m $1
-}
 # Git Push (Current Branch) Origin
 function gpo(){
   branch=`git symbolic-ref -q --short HEAD`
