@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="pygmalion"
 
 # Plugins
-plugins=(git sublime bundler gem cap)
+plugins=(sublime bundler gem cap)
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -43,6 +43,10 @@ alias rs="rspec"
 alias h="history | grep"
 alias v="vim"
 
+# Manual Git Shortcuts
+alias gst="git status"
+alias ga="git add"
+
 # -----------------------------------------
 # Custom Functions
 # -----------------------------------------
@@ -50,6 +54,11 @@ alias v="vim"
 # Get top 20 commands
 function top20(){
   history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -20
+}
+
+# Quick Commit
+function gcm(){
+ git commit -m '$1'
 }
 # This is where I typically put my private projects
 function personal(){
