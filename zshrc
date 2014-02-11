@@ -47,18 +47,29 @@ alias v="vim"
 alias gst="git status"
 alias ga="git add"
 alias gcm="git commit -m"
+alias gco="git checkout"
+alias gnb="git checkout -b"
+alias gpl="git pull"
+alias gplr="git pull --rebase"
+alias gph="git push"
+alias gfo="git fetch origin"
+alias gbr="git branch"
 
 # -----------------------------------------
 # Custom Functions
 # -----------------------------------------
 
+# Search down for file
+function se(){
+  find . -name '[$1]*'
+}
 # Get top 20 commands
 function top20(){
   history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -20
 }
 
 # Git Push (Current Branch) Origin
-function gpo(){
+function gpho(){
   branch=`git symbolic-ref -q --short HEAD`
   git push origin $branch
 }
@@ -99,6 +110,7 @@ function gph(){
 # -----------------------------------------
 # Alias' for Work
 # -----------------------------------------
+alias esearch="~/Documents/work/elasticsearch/bin/elasticsearch -f"
 
 function smdb(){
   cd ~/Documents/Work/web/tmp

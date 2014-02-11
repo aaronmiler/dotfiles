@@ -26,6 +26,7 @@ Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-rails.git'
 Bundle 'Solarized'
+Bundle 'scrooloose/syntastic'
 
 
 "------------------------------------------------------------
@@ -111,6 +112,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set tabstop=2
+
+" No more Swap files in projects
+set directory=~/.vim/swap//
 
 "-----------------------------------------------------------
 " Leader
