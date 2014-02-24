@@ -54,6 +54,8 @@ alias gplr="git pull --rebase"
 alias gph="git push"
 alias gfo="git fetch origin"
 alias gbr="git branch"
+alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+
 
 # -----------------------------------------
 # Custom Functions

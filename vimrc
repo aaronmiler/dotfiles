@@ -114,7 +114,6 @@ set expandtab
 set tabstop=2
 
 " No more Swap files in projects
-set directory=~/.vim/swap//
 
 "-----------------------------------------------------------
 " Leader
