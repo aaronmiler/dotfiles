@@ -42,6 +42,7 @@ alias dotfiles="cd ~/dotfiles"
 alias rs="rspec"
 alias h="history | grep"
 alias v="vim"
+alias guard="bundle exec guard"
 
 # Manual Git Shortcuts
 alias gst="git status"
