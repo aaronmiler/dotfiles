@@ -43,8 +43,10 @@ alias rs="rspec"
 alias h="history | grep"
 alias v="vim"
 alias guard="bundle exec guard"
+alias bu="bundle update"
+alias psg="ps aux | grep"
 
-# Manual Git Shortcuts
+# Git Shortcuts
 alias gst="git status"
 alias ga="git add"
 alias gcm="git commit -m"
@@ -55,6 +57,8 @@ alias gplr="git pull --rebase"
 alias gph="git push"
 alias gfo="git fetch origin"
 alias gbr="git branch"
+alias grhh="git reset --hard head"
+# Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 
 
