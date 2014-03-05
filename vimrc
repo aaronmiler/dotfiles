@@ -1,7 +1,6 @@
 "------------------------------------------------------------
 " Features
 "
-
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
 set nocompatible
@@ -122,6 +121,20 @@ let mapleader = ","
 map <Leader>p :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 
 "------------------------------------------------------------
+" Functions and Such
+
+" Stolen from 'More Instantly Better Vim' by Damian Conway
+" http://www.youtube.com/watch?v=aHm36-na4-4
+
+" Highlight the 81st character to identify long lines
+highlight ColorColumn ctermbg=blue
+call matchadd('ColorColumn','\%81v',100)
+
+" No Tabs, and no Trailing Whitespace
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+
+"------------------------------------------------------------
 " Mappings
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
@@ -140,3 +153,7 @@ noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
 " Control S to save
 map <c-s> <esc>:w<CR>
 imap <c-s> <esc>:w<CR>
+
+" Remap Semicolon to Colon
+nnoremap ; :
+nnoremap : ;
