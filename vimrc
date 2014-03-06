@@ -151,8 +151,8 @@ noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
 noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
 
 " Control S to save
-map <c-s> <esc>:w<CR>
-imap <c-s> <esc>:w<CR>
+map <c-s> <esc>;w<CR>
+imap <c-s> <esc>;w<CR>
 
 " Remap Semicolon to Colon
 nnoremap ; :
