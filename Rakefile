@@ -5,7 +5,7 @@ task :install do
   replace_all = false
   Dir['*'].each do |file|
     next if %w[Rakefile README.md LICENSE id_dsa.pub].include? file
-    
+
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
         replace_file(file)
@@ -27,12 +27,6 @@ task :install do
       link_file(file)
     end
   end
-
-  # Handle ssh pubkey on its own
-  puts "Linking public ssh key"
-  system %Q{rm "$HOME/.ssh/id_dsa.pub"}
-  system %Q{ln -s "$PWD/id_dsa.pub" "$HOME/.ssh/id_dsa.pub"}
-
 end
 
 def replace_file(file)

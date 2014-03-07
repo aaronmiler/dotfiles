@@ -20,30 +20,24 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" " required! 
+" " required!
 Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-rails.git'
 Bundle 'Solarized'
-Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-git.git'
 
 
 "------------------------------------------------------------
-" Must have options
-"
 " These are highly recommended options.
 
 set hidden
 
 " Better command-line completion
 set wildmenu
-
-" Show partial commands in the last line of the screen
 set showcmd
-
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
 set hlsearch
+set incsearch
 
 "------------------------------------------------------------
 " Usability options
@@ -52,8 +46,6 @@ set hlsearch
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
-
-" Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
 
 " When opening a new line and no filetype-specific indenting is enabled, keep
@@ -65,41 +57,19 @@ set autoindent
 " coming from other editors would expect.
 set nostartofline
 
-" Display the cursor position on the last line of the screen or in the status
-" line of a window
 set ruler
-
-" Always display the status line, even if only one window is displayed
 set laststatus=2
-
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
 set confirm
-
-" Use visual bell instead of beeping when doing something wrong
 set visualbell
-
-" And reset the terminal code for the visual bell. If visualbell is set, and
-" this line is also included, vim will neither flash nor beep. If visualbell
-" is unset, this does nothing.
 set t_vb=
-
-" Enable use of the mouse for all modes
-set mouse=a
-
-" Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
 set cmdheight=2
 
 " Display line numbers on the left
 set relativenumber
+set numberwidth=1
 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
-
-" Use <F11> to toggle between 'paste' and 'nopaste'
-set pastetoggle=<F11>
-
 
 "------------------------------------------------------------
 " Indentation options
@@ -112,14 +82,19 @@ set softtabstop=2
 set expandtab
 set tabstop=2
 
+"------------------------------------------------------------
 " No more Swap files in projects
+
+set directory=~/.vim/swp//
+set undodir=~/.vim/undo//
 
 "-----------------------------------------------------------
 " Leader
 let mapleader = ","
 
-map <Leader>p :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
-map <Leader>r :! chrome-cli reload<CR><CR>
+map <Leader>p ;set paste<cr>;r !pbpaste<cr>;set nopaste<cr>
+map <Leader>r ;! chrome-cli reload<CR><CR>
+map <Leader>hl ;nohl<CR>
 
 "------------------------------------------------------------
 " Functions and Such
@@ -134,6 +109,11 @@ call matchadd('ColorColumn','\%81v',100)
 " No Tabs, and no Trailing Whitespace
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
+
+set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.DS_Store,*.db " Ignore these files, obviously
+
+" Automatically remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
 "------------------------------------------------------------
 " Mappings
