@@ -119,6 +119,7 @@ set tabstop=2
 let mapleader = ","
 
 map <Leader>p :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
+map <Leader>r :! chrome-cli reload<CR><CR>
 
 "------------------------------------------------------------
 " Functions and Such
