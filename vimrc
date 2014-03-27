@@ -85,7 +85,6 @@ set tabstop=2
 "------------------------------------------------------------
 " No more Swap files in projects
 
-set directory=~/.vim/swp//
 set undodir=~/.vim/undo//
 
 "-----------------------------------------------------------

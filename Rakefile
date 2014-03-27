@@ -3,8 +3,9 @@ require 'rake'
 desc "install the dot files into user's home directory"
 task :install do
   replace_all = false
+  link_zsh_theme
   Dir['*'].each do |file|
-    next if %w[Rakefile README.md LICENSE id_dsa.pub].include? file
+    next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme].include? file
 
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
@@ -29,6 +30,10 @@ task :install do
   end
 end
 
+task :install_theme do
+ link_zsh_theme
+end
+
 def replace_file(file)
   system %Q{rm "$HOME/.#{file}"}
   link_file(file)
@@ -37,4 +42,10 @@ end
 def link_file(file)
   puts "linking ~/.#{file}"
   system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
+end
+
+def link_zsh_theme
+  file = "miler.zsh-theme"
+  puts "linking ZSH theme"
+  system %Q{ln -s "$PWD/#{file}" "$HOME/.oh-my-zsh/themes/#{file}"}
 end

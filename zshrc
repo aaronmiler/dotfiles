@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Theme Declaration
-ZSH_THEME="pygmalion"
+ZSH_THEME="miler"
 
 # Plugins
 plugins=(sublime bundler gem cap)
@@ -35,6 +35,9 @@ eval "$(rbenv init -)"
 
 # NPM Bin Path
 export PATH=/usr/local/bin/npm:$PATH
+
+# All the Paths!
+export PATH=/usr/local/bin:$PATH
 
 # My Aliases
 alias home="cd ~/"
