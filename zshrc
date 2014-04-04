@@ -20,7 +20,6 @@ COMPLETION_WAITING_DOTS="true"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-
 source $ZSH/oh-my-zsh.sh
 
 # Putting these here so I can Control-S to save in vim
@@ -38,6 +37,9 @@ export PATH=/usr/local/bin/npm:$PATH
 
 # All the Paths!
 export PATH=/usr/local/bin:$PATH
+
+# Make sure Brew comes before others
+export PATH="/usr/local/bin:$PATH"
 
 # My Aliases
 alias home="cd ~/"

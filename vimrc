@@ -66,6 +66,7 @@ set cmdheight=2
 
 " Display line numbers on the left
 set relativenumber
+set number
 set numberwidth=1
 
 " Quickly time out on keycodes, but never time out on mappings
@@ -91,8 +92,12 @@ set undodir=~/.vim/undo//
 " Leader
 let mapleader = ","
 
+" NOTE: ; takes the place of : because I've remapped them
+
 map <Leader>p ;set paste<cr>;r !pbpaste<cr>;set nopaste<cr>
-map <Leader>r ;! chrome-cli reload<CR><CR>
+map <Leader>r ;!chrome-cli reload<CR><CR>
+map <Leader>mk ;!mkdir -p %;p;h<CR><CR>
+map <Leader>o ;!open .<CR><CR>
 map <Leader>hl ;nohl<CR>
 
 "------------------------------------------------------------
