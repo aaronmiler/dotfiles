@@ -52,7 +52,7 @@ alias bu="bundle update"
 alias psg="ps aux | grep"
 
 # Git Shortcuts
-alias gst="git status"
+alias gst="git status -sb"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gc="git commit"
