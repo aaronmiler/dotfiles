@@ -44,7 +44,7 @@ export PATH="/usr/local/bin:$PATH"
 # My Aliases
 alias home="cd ~/"
 alias dotfiles="cd ~/dotfiles"
-alias rs="rspec"
+alias rs="bundle exec rspec"
 alias h="history | grep"
 alias v="vim"
 alias guard="bundle exec guard"
@@ -75,8 +75,13 @@ alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d
 # -----------------------------------------
 
 # Search down for file
-function se(){
+function search(){
   find . -name '[$1]*'
+}
+
+# Clean up old Swap Files
+function cleanswap() {
+  find . -name "*swp" -print0  | xargs -0 rm -rf
 }
 # Get top 20 commands
 function top20(){
