@@ -88,6 +88,9 @@ set tabstop=2
 
 set undodir=~/.vim/undo//
 
+
+set autoread
+
 "-----------------------------------------------------------
 " Leader
 let mapleader = ","
