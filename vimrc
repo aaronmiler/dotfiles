@@ -102,7 +102,7 @@ map <Leader>r ;!chrome-cli reload<CR><CR>
 map <Leader>mk ;!mkdir -p %;p;h<CR><CR>
 map <Leader>o ;!open .<CR><CR>
 map <Leader>hl ;nohl<CR>
-map <Leader>t ;tabedit
+map <Leader>t ;tabedit ./
 
 "------------------------------------------------------------
 " Functions and Such

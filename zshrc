@@ -76,7 +76,7 @@ alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d
 
 # Search down for file
 function search(){
-  find . -name '[$1]*'
+  find ./ -name '[$1]*'
 }
 
 # Clean up old Swap Files
@@ -131,6 +131,7 @@ function gph(){
 # Alias' for Work
 # -----------------------------------------
 alias esearch="~/Documents/work/elasticsearch/bin/elasticsearch -f"
+alias nredis='ssh -L 6379:localhost:6379 aaron@nano -fC2qTnN'
 
 function smdb(){
   cd ~/Documents/Work/web/tmp
