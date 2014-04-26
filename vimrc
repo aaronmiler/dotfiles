@@ -24,7 +24,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'tpope/vim-rails.git'
-Bundle 'Solarized'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-git.git'
 
 
@@ -88,8 +88,13 @@ set tabstop=2
 
 set undodir=~/.vim/undo//
 
-
 set autoread
+
+"-----------------------------------------------------------
+" Colors!
+
+set background=dark
+colorscheme solarized
 
 "-----------------------------------------------------------
 " Leader
