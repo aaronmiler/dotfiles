@@ -26,6 +26,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-rails.git'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-git.git'
+Bundle 'kchmck/vim-coffee-script'
 
 
 "------------------------------------------------------------

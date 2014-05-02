@@ -101,6 +101,7 @@ function gpho(){
 }
 function gcm {
   git commit -m "$*"
+  echo 'Push it!'
 }
 # This is where I typically put my private projects
 function personal(){
