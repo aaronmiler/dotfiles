@@ -103,11 +103,12 @@ let mapleader = ","
 
 " NOTE: ; takes the place of : because I've remapped them
 
-map <Leader>p ;set paste<cr>;r !pbpaste<cr>;set nopaste<cr>
-map <Leader>r ;!chrome-cli reload<CR><CR>
+map <Leader>hl ;nohl<CR>
+map <Leader>i mmgg=G`m<CR>
 map <Leader>mk ;!mkdir -p %;p;h<CR><CR>
 map <Leader>o ;!open .<CR><CR>
-map <Leader>hl ;nohl<CR>
+map <Leader>p ;set paste<CR>o<esc>"*]p:set nopaste<cr>
+map <Leader>r ;!chrome-cli reload<CR><CR>
 map <Leader>t ;tabedit ./
 
 "------------------------------------------------------------
