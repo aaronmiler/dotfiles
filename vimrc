@@ -109,6 +109,8 @@ map <Leader>mk ;!mkdir -p %;p;h<CR><CR>
 map <Leader>o ;!open .<CR><CR>
 map <Leader>p ;set paste<CR>o<esc>"*]p:set nopaste<cr>
 map <Leader>r ;!chrome-cli reload<CR><CR>
+map <Leader>hl ;nohl<CR>
+map <Leader>sp ;setlocal spell! spelllang=en_us<CR>
 map <Leader>t ;tabedit ./
 
 "------------------------------------------------------------

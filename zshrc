@@ -50,11 +50,13 @@ alias v='vim'
 alias guard='bundle exec guard'
 alias bu='bundle update'
 alias psg='ps aux | grep'
+alias pw='cd ~/Documents/Pineworks'
 
 # Rails Shortcuts
 alias rc='rails console'
 alias rcp'rails console production'
 alias rs='bundle install && rails server -p 3000'
+alias rg='rails generate'
 
 # Git Shortcuts
 alias gst='git status -sb'
@@ -124,8 +126,8 @@ function work(){
   fi
 }
 # Create a new app based on my template file Gist
-function new_app(){
-  rails new $1 -m https://gist.github.com/aaronmiler/5719303/raw/template.rb
+function newapp(){
+  rails new $1 -m https://raw.github.com/RailsApps/rails-composer/master/composer.rb
 }
 
 # Push Specified Branch to Heroku as Master
