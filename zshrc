@@ -93,7 +93,7 @@ function cleanswap() {
 }
 # Get top 20 commands
 function top20(){
-  history | awk "{a[$2]++}END{for(i in a){print a[i] ' ' i}}" | sort -rn | head -20
+  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -20
 }
 
 # Git Push (Current Branch) Origin

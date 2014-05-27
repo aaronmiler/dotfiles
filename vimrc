@@ -66,8 +66,8 @@ set t_vb=
 set cmdheight=2
 
 " Display line numbers on the left
-set relativenumber
 set number
+set relativenumber
 set numberwidth=1
 
 " Quickly time out on keycodes, but never time out on mappings
@@ -107,7 +107,7 @@ map <Leader>hl ;nohl<CR>
 map <Leader>i mmgg=G`m<CR>
 map <Leader>mk ;!mkdir -p %;p;h<CR><CR>
 map <Leader>o ;!open .<CR><CR>
-map <Leader>p ;set paste<CR>o<esc>"*]p:set nopaste<cr>
+map <Leader>p ;set paste<CR>;r !pbpaste<cr>;set nopaste<cr>
 map <Leader>r ;!chrome-cli reload<CR><CR>
 map <Leader>hl ;nohl<CR>
 map <Leader>sp ;setlocal spell! spelllang=en_us<CR>
