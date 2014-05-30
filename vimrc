@@ -23,10 +23,12 @@ call vundle#rc()
 " " required!
 Bundle 'gmarik/vundle'
 
-Bundle 'tpope/vim-rails.git'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-git.git'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'thoughtbot/vim-rspec'
+Bundle 'jgdavey/tslime.vim'
 
 
 "------------------------------------------------------------
@@ -37,8 +39,12 @@ set hidden
 " Better command-line completion
 set wildmenu
 set showcmd
+
+" Searches
 set hlsearch
 set incsearch
+set ignorecase
+set smartcase
 
 "------------------------------------------------------------
 " Usability options
@@ -78,11 +84,31 @@ set notimeout ttimeout ttimeoutlen=200
 "
 
 " Indentation settings for using 2 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 set tabstop=2
+
+
+"------------------------------------------------------------
+" Split Preferences
+
+set winwidth=84
+set winheight=5
+set winminheight=5
+set winheight=999
+
+" Easier Split Navigation
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Solit Opening
+
+set splitbelow
+set splitright
 
 "------------------------------------------------------------
 " No more Swap files in projects
@@ -98,20 +124,29 @@ set background=dark
 colorscheme solarized
 
 "-----------------------------------------------------------
+" Overrides
+
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+
+"-----------------------------------------------------------
 " Leader
 let mapleader = ","
 
 " NOTE: ; takes the place of : because I've remapped them
 
+map <Leader>a ;call RunAllSpecs()<CR>
+map <Leader>e ;tabe ./
 map <Leader>hl ;nohl<CR>
 map <Leader>i mmgg=G`m<CR>
+map <Leader>l ;call RunLastSpec()<CR>
 map <Leader>mk ;!mkdir -p %;p;h<CR><CR>
 map <Leader>o ;!open .<CR><CR>
 map <Leader>p ;set paste<CR>;r !pbpaste<cr>;set nopaste<cr>
 map <Leader>r ;!chrome-cli reload<CR><CR>
 map <Leader>hl ;nohl<CR>
+map <Leader>s ;call RunNearestSpec()<CR>
 map <Leader>sp ;setlocal spell! spelllang=en_us<CR>
-map <Leader>t ;tabedit ./
+map <Leader>t ;call RunCurrentSpecFile()<CR>
 
 "------------------------------------------------------------
 " Functions and Such
