@@ -83,7 +83,7 @@ function gclean() {
   fi
 }
 
-alias ls='ls -lhG'
+alias ls='ls -lhGa'
 
 # -----------------------------------------
 # Custom Functions
