@@ -5,10 +5,11 @@
 " have made, as well as sanely reset options when re-sourcing .vimrc
 set nocompatible
 
-" Attempt to determine the type of a file based on its name and possibly its
-" contents. Use this to allow intelligent auto-indenting for each filetype,
-" and for plugins that are filetype specific.
-filetype indent plugin on
+if has("autocmd")
+  filetype indent plugin on
+endif
+
+:runtime macros/matchit.vim
 
 " Enable syntax highlighting
 syntax on
@@ -29,6 +30,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'jgdavey/tslime.vim'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock.git'
 
 
 "------------------------------------------------------------

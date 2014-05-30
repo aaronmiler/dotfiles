@@ -75,6 +75,13 @@ alias grhh='git reset --hard head'
 alias gdh='git diff head'
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
+function gclean() {
+  read "REPLY?Clean up merged branches? NOTE: Will delete any branch behind master/with no changes " -k 1
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+    git branch --merged | grep -v '.master$' | grep -v '.production$' | xargs git branch -d
+  fi
+}
 
 alias ls='ls -lhG'
 
