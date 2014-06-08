@@ -41,6 +41,9 @@ export PATH=/usr/local/bin:$PATH
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
 
+# Make Cask install in /Applications
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 # My Aliases
 alias home='cd ~/'
 alias dotfiles='cd ~/dotfiles'
