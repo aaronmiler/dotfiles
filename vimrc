@@ -135,21 +135,19 @@ let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 " Leader
 let mapleader = ","
 
-" NOTE: ; takes the place of : because I've remapped them
-
-map <Leader>a ;call RunAllSpecs()<CR>
-map <Leader>e ;tabe ./
-map <Leader>hl ;nohl<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>e :tabe ./
+map <Leader>hl :nohl<CR>
 map <Leader>i mmgg=G`m<CR>
-map <Leader>l ;call RunLastSpec()<CR>
-map <Leader>mk ;!mkdir -p %;p;h<CR><CR>
-map <Leader>o ;!open .<CR><CR>
-map <Leader>p ;set paste<CR>;r !pbpaste<cr>;set nopaste<cr>
-map <Leader>r ;!chrome-cli reload<CR><CR>
-map <Leader>hl ;nohl<CR>
-map <Leader>s ;call RunNearestSpec()<CR>
-map <Leader>sp ;setlocal spell! spelllang=en_us<CR>
-map <Leader>t ;call RunCurrentSpecFile()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>mk :!mkdir -p %:p:h<CR><CR>
+map <Leader>o :!open .<CR><CR>
+map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
+map <Leader>r :!chrome-cli reload<CR><CR>
+map <Leader>hl :nohl<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>sp :setlocal spell! spelllang=en_us<CR>
+map <Leader>t :call RunCurrentSpecFile()<CR>
 
 "------------------------------------------------------------
 " Functions and Such
@@ -187,9 +185,8 @@ noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
 noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
 
 " Control S to save
-map <c-s> <esc>;w<CR>
-imap <c-s> <esc>;w<CR>
+map <c-s> <esc>:w<CR>
+imap <c-s> <esc>:w<CR>
 
 " Remap Semicolon to Colon
 nnoremap ; :
-nnoremap : ;
