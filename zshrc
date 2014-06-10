@@ -25,22 +25,19 @@ source $ZSH/oh-my-zsh.sh
 # Putting these here so I can Control-S to save in vim
 stty -ixon
 
+## Exports
+#---------------
 #Heroku
 export PATH="/usr/local/heroku/bin:$PATH"
-
 # RB Env
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
 # NPM Bin Path
 export PATH=/usr/local/bin/npm:$PATH
-
 # All the Paths!
 export PATH=/usr/local/bin:$PATH
-
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
-
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
@@ -53,7 +50,6 @@ alias v='vim'
 alias guard='bundle exec guard'
 alias bu='bundle update'
 alias psg='ps aux | grep'
-alias pw='cd ~/Documents/Pineworks'
 alias rerc='. ~/.zshrc'
 
 # Rails Shortcuts
@@ -61,6 +57,7 @@ alias rc='rails console'
 alias rcp'rails console production'
 alias rs='bundle install && rails server -p 3000'
 alias rg='rails generate'
+alias ogh='hub browse -- ""'
 
 # Git Shortcuts
 alias gst='git status -sb'
@@ -71,13 +68,13 @@ alias gco='git checkout'
 alias gnb='git checkout -b'
 alias gpl='git pull'
 alias gplom='git pull origin master'
-alias gplr='git pull --rebase'
+alias gprom='git pull --rebase origin master'
 alias gph='git push'
 alias gfo='git fetch origin'
 alias gbr='git branch'
 alias grhh='git reset --hard head'
 alias gdh='git diff head'
-alias ogh='hub browse -- ""'
+
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
 
@@ -122,6 +119,13 @@ function gcm {
   git commit -m "$*"
   echo 'Push it!'
 }
+function pw() {
+  if [ ! -z $2 ]; then
+    cd ~/Documents/Pineworks/$1/$2
+  else
+    cd ~/Documents/Pineworks/$1
+  fi
+}
 # This is where I typically put my private projects
 function personal(){
   if [ ! -z $2 ]; then
@@ -142,10 +146,6 @@ function work(){
     git fetch origin
   fi
 }
-# Create a new app based on my template file Gist
-function newapp(){
-  rails new $1 -m https://raw.github.com/RailsApps/rails-composer/master/composer.rb
-}
 
 # Push Specified Branch to Heroku as Master
 function gph(){
@@ -159,7 +159,6 @@ function gph(){
 # -----------------------------------------
 # Alias' for Work
 # -----------------------------------------
-alias esearch='~/Documents/work/elasticsearch/bin/elasticsearch -f'
 alias nredis='ssh -L 6379:localhost:6379 aaron@nano -fC2qTnN'
 
 function smdb(){
