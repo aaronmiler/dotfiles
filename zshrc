@@ -116,7 +116,7 @@ function gpho(){
 }
 function gplo(){
   branch=`git symbolic-ref -q --short HEAD`
-  git push origin $branch
+  git pull origin $branch
 }
 function gcm {
   git commit -m "$*"
