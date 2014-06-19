@@ -108,7 +108,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Solit Opening
+" Split Opening
 
 set splitbelow
 set splitright
@@ -135,19 +135,20 @@ let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 " Leader
 let mapleader = ","
 
-map <Leader>a :call RunAllSpecs()<CR>
-map <Leader>e :tabe ./
+map <Leader>cp :%y+<CR>
 map <Leader>hl :nohl<CR>
 map <Leader>i mmgg=G`m<CR>
-map <Leader>l :call RunLastSpec()<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
 map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
-map <Leader>r :!chrome-cli reload<CR><CR>
+map <Leader>r :w<CR>:!chrome-cli reload<CR><CR>
 map <Leader>hl :nohl<CR>
-map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
-map <Leader>t :call RunCurrentSpecFile()<CR>
+
+" Leaders for editing: Open Tab, Split, Vert Split
+map <Leader>he :sp ./
+map <Leader>te :tabe ./
+map <Leader>ve :vsp ./
 
 "------------------------------------------------------------
 " Functions and Such
