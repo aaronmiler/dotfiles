@@ -137,7 +137,6 @@ let mapleader = ","
 
 map <Leader>cp :%y+<CR>
 map <Leader>bi :! bundle install<CR><CR>
-map <Leader>e :tabe ./
 map <Leader>hl :nohl<CR>
 map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
@@ -148,8 +147,8 @@ map <Leader>hl :nohl<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
 
 " Leaders for editing: Open Tab, Split, Vert Split
+map <Leader>e :tabe ./
 map <Leader>he :sp ./
-map <Leader>te :tabe ./
 map <Leader>ve :vsp ./
 
 "------------------------------------------------------------
