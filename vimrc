@@ -136,6 +136,8 @@ let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 let mapleader = ","
 
 map <Leader>cp :%y+<CR>
+map <Leader>bi :! bundle install<CR><CR>
+map <Leader>e :tabe ./
 map <Leader>hl :nohl<CR>
 map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
