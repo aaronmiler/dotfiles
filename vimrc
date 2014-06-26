@@ -29,6 +29,7 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock.git'
+Plugin 'kien/ctrlp.vim.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
