@@ -8,8 +8,6 @@ filetype off
 
 :runtime macros/matchit.vim
 
-" Enable syntax highlighting
-syntax on
 
 "------------------------------------------------------------
 " Set up Vunbler/Vundle
@@ -30,9 +28,14 @@ Plugin 'jgdavey/tslime.vim'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock.git'
 Plugin 'kien/ctrlp.vim.git'
+Plugin 'slim-template/vim-slim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+" Enable syntax highlighting
+syntax enable
+
 filetype plugin indent on    " required
 
 "------------------------------------------------------------
