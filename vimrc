@@ -141,13 +141,11 @@ let mapleader = ","
 
 map <Leader>cp :%y+<CR>
 map <Leader>bi :! bundle install<CR><CR>
-map <Leader>hl :nohl<CR>
 map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
 map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
 map <Leader>r :w<CR>:!chrome-cli reload<CR><CR>
-map <Leader>hl :nohl<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
 
 " Leaders for editing: Open Tab, Split, Vert Split
@@ -189,6 +187,9 @@ noremap <up>    :echoerr 'USE K TO GO UP'<CR>
 noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
 noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
 noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
+
+" Clear last search highlight
+nnoremap <Space> :noh<cr>
 
 " Control S to save
 map <c-s> <esc>:w<CR>

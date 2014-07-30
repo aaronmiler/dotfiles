@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/amiler/Documents/Work/web/lib/assets/javascripts/admin/views/category'
-let g:netrw_dirhist_2='/Users/amiler/Documents/Work/web/lib/assets/javascripts/admin/views/category/categorizations'
-let g:netrw_dirhist_3='/Users/amiler/Documents/Work/web/lib/assets/javascripts/admin/views/category'
-let g:netrw_dirhist_4='/Users/amiler/Documents/Work/web/lib/assets/javascripts/admin/views'
-let g:netrw_dirhist_5='/Users/amiler/Documents/Work/web/lib/assets/javascripts/admin/views/categories'
-let g:netrw_dirhist_6='/Users/amiler/Documents/Work/web/lib/assets/javascripts/admin/models/product'
-let g:netrw_dirhist_7='/Users/amiler/Documents/Work/web/lib/assets/javascripts/admin/models'
-let g:netrw_dirhist_8='/Users/amiler/Documents/Work/web/spec/fabricators/product'
-let g:netrw_dirhist_9='/Users/amiler/Documents/Work/web/spec/fabricators'
+let g:netrw_dirhist_cnt =0
