@@ -51,6 +51,7 @@ alias guard='bundle exec guard'
 alias bu='bundle update'
 alias psg='ps aux | grep'
 alias rerc='. ~/.zshrc'
+alias ls='ls -lhGa'
 
 # Rails Shortcuts
 alias rc='rails console'
@@ -74,6 +75,7 @@ alias gfo='git fetch origin'
 alias gbr='git branch'
 alias grhh='git reset --hard head'
 alias gdh='git diff head'
+alias gdb='git branch -D'
 
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
@@ -85,8 +87,6 @@ function gclean() {
     git branch --merged | grep -v '.master$' | grep -v '.production$' | xargs git branch -d
   fi
 }
-
-alias ls='ls -lhGa'
 
 # -----------------------------------------
 # Custom Functions
@@ -132,6 +132,14 @@ function personal(){
     cd ~/Documents/Projects/$1/$2
   else
     cd ~/Documents/Projects/$1
+  fi
+}
+# For jumping to Notes
+function notes(){
+  if [ ! -z $2 ]; then
+    cd ~/Documents/Notes/$1/$2
+  else
+    cd ~/Documents/Notes/$1
   fi
 }
 # For jekyll/octopress sites
