@@ -13,7 +13,7 @@ prompt_setup_miler(){
   base_prompt_nocolor=$(echo "$base_prompt" | perl -pe "s/%\{[^}]+\}//g")
   post_prompt_nocolor=$(echo "$post_prompt" | perl -pe "s/%\{[^}]+\}//g")
 
-  add-zsh-hook precmd prompt_miler_precmd
+  precmd_functions+=(prompt_miler_precmd)
 }
 
 prompt_miler_precmd(){
