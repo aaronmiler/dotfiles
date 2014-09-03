@@ -93,30 +93,30 @@ function gclean() {
 function repo {
   basename `pwd`
 }
+
+function branch {
+  git symbolic-ref -q --short HEAD
+}
 # Git Push (Current Branch) Origin
 function gpho(){
-  branch=`git symbolic-ref -q --short HEAD`
-  git push origin $branch
+  git push origin `branch`
 }
 function gplo(){
-  branch=`git symbolic-ref -q --short HEAD`
-  git pull origin $branch
+  git pull origin `branch`
 }
 function gcm {
-  branch=`git symbolic-ref -q --short HEAD`
-  trakrgem post "git commit" "`repo` $branch: $*"
-
+  trakrgem post "git commit" "`repo` `branch`: $*"
   git commit -m "$*"
   echo 'Push it!'
 }
 
 function gco {
-  trakrgem post "git checkout" "$1"
+  trakrgem post "git checkout" "`repo` $1"
   git checkout $1
 }
 
 function gnb {
-  trakrgem post "git new branch" "$1"
+  trakrgem post "git new branch" "`repo` $1"
   git checkout -b $1
 }
 # -----------------------------------------
