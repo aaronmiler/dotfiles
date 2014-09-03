@@ -89,6 +89,26 @@ function gclean() {
 }
 
 # -----------------------------------------
+# Functions for logging git activity
+# -----------------------------------------
+
+# Git Push (Current Branch) Origin
+function gpho(){
+  branch=`git symbolic-ref -q --short HEAD`
+  git push origin $branch
+}
+function gplo(){
+  branch=`git symbolic-ref -q --short HEAD`
+  git pull origin $branch
+}
+function gcm {
+  branch=`git symbolic-ref -q --short HEAD`
+  trakrgem 'git commit' "$branch: $*"
+  git commit -m "$*"
+  echo 'Push it!'
+}
+
+# -----------------------------------------
 # Custom Functions
 # -----------------------------------------
 
@@ -106,19 +126,6 @@ function top20(){
   history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -20
 }
 
-# Git Push (Current Branch) Origin
-function gpho(){
-  branch=`git symbolic-ref -q --short HEAD`
-  git push origin $branch
-}
-function gplo(){
-  branch=`git symbolic-ref -q --short HEAD`
-  git pull origin $branch
-}
-function gcm {
-  git commit -m "$*"
-  echo 'Push it!'
-}
 function pw() {
   if [ ! -z $2 ]; then
     cd ~/Documents/Pineworks/$1/$2
