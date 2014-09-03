@@ -5,7 +5,7 @@ task :install do
   replace_all = false
   link_zsh_theme
   Dir['*'].each do |file|
-    next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme].include? file
+    next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme aaronmiler.itermcolors].include? file
 
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
