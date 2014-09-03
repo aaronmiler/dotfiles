@@ -103,7 +103,7 @@ function gplo(){
 }
 function gcm {
   branch=`git symbolic-ref -q --short HEAD`
-  trakrgem "git commit" "$branch: $*"
+  trakrgem post "git commit" "$branch: $*"
   git commit -m "$*"
   echo 'Push it!'
 }
@@ -163,20 +163,14 @@ function work(){
 }
 
 # Push Specified Branch to Heroku as Master
-function gph(){
-  branchName=`git symbolic-ref -q --short HEAD`
-  git checkout $1
-  git rebase $branchName
-  git push heroku $1:master -f
-  git checkout $branchName
-}
+#function gph(){
+#  branchName=`git symbolic-ref -q --short HEAD`
+#  git checkout $1
+#  git rebase $branchName
+#  git push heroku $1:master -f
+#  git checkout $branchName
+#}
 
 # -----------------------------------------
 # Alias' for Work
 # -----------------------------------------
-alias nredis='ssh -L 6379:localhost:6379 aaron@nano -fC2qTnN'
-
-function smdb(){
-  cd ~/Documents/Work/web/tmp
-  mongod --dbpath=.
-}
