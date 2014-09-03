@@ -103,7 +103,7 @@ function gplo(){
 }
 function gcm {
   branch=`git symbolic-ref -q --short HEAD`
-  trakrgem 'git commit' "$branch: $*"
+  trakrgem "git commit" "$branch: $*"
   git commit -m "$*"
   echo 'Push it!'
 }
