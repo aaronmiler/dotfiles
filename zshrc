@@ -65,8 +65,6 @@ alias gst='git status -sb'
 alias ga='git add'
 alias gaa='git add --all .'
 alias gc='git commit'
-alias gco='git checkout'
-alias gnb='git checkout -b'
 alias gpl='git pull'
 alias gplom='git pull origin master'
 alias gprom='git pull --rebase origin master'
@@ -92,6 +90,9 @@ function gclean() {
 # Functions for logging git activity
 # -----------------------------------------
 
+function repo {
+  basename `pwd`
+}
 # Git Push (Current Branch) Origin
 function gpho(){
   branch=`git symbolic-ref -q --short HEAD`
@@ -103,11 +104,20 @@ function gplo(){
 }
 function gcm {
   branch=`git symbolic-ref -q --short HEAD`
-  trakrgem post "git commit" "$branch: $*"
+  trakrgem post "git commit" "`repo` $branch: $*"
   git commit -m "$*"
   echo 'Push it!'
 }
 
+function gco {
+  trakrgem post "git checkout" "$1"
+  git checkout $1
+}
+
+function gnb {
+  trakrgem post "git new branch" "$1"
+  git checkout -b $1
+}
 # -----------------------------------------
 # Custom Functions
 # -----------------------------------------
