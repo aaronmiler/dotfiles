@@ -105,18 +105,18 @@ function gplo(){
   git pull origin `branch`
 }
 function gcm {
-  trakrgem post "git commit" "`repo` `branch`: $*"
+  rogu post "git commit" "`repo` `branch`: $*"
   git commit -m "$*"
   echo 'Push it!'
 }
 
 function gco {
-  trakrgem post "git checkout" "`repo` $1"
+  rogu post "git checkout" "`repo` $1"
   git checkout $1
 }
 
 function gnb {
-  trakrgem post "git new branch" "`repo` $1"
+  rogu post "git new branch" "`repo` $1"
   git checkout -b $1
 }
 # -----------------------------------------
