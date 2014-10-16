@@ -116,6 +116,7 @@ function gco {
 }
 
 function gnb {
+  git checkout master
   rogu post "git new branch" "`repo` $1"
   git checkout -b $1
 }
