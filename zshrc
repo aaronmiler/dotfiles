@@ -47,7 +47,7 @@ alias dotfiles='cd ~/dotfiles'
 alias rs='bundle exec rspec'
 alias h='history | grep'
 alias v='vim'
-alias guard='bundle exec guard'
+#alias guard='bundle exec guard'
 alias bu='bundle update'
 alias psg='ps aux | grep'
 alias rerc='. ~/.zshrc'
@@ -59,21 +59,25 @@ alias rcp'rails console production'
 alias rs='bundle install && rails server -p 3000'
 alias rg='rails generate'
 alias ogh='hub browse -- ""'
+alias lbundle='BUNDLE_GEMFILE=Gemfile.local bundle'
+alias lbe='BUNDLE_GEMFILE=Gemfile.local bundle exec'
 
 # Git Shortcuts
-alias gst='git status -sb'
 alias ga='git add'
-alias gaa='git add --all .'
 alias gc='git commit'
+alias gst='git status -sb'
+alias gaa='git add --all .'
 alias gpl='git pull'
-alias gplom='git pull origin master'
-alias gprom='git pull --rebase origin master'
 alias gph='git push'
 alias gfo='git fetch origin'
 alias gbr='git branch'
-alias grhh='git reset --hard head'
 alias gdh='git diff head'
 alias gdb='git branch -D'
+alias grhh='git reset --hard head'
+alias gcof='git checkout HEAD --'
+alias gcom='git checkout master'
+alias gplom='git pull origin master'
+alias gprom='git pull --rebase origin master'
 
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
@@ -100,6 +104,9 @@ function branch {
 # Git Push (Current Branch) Origin
 function gpho(){
   git push origin `branch`
+}
+function gphof(){
+  git push origin `branch` -f
 }
 function gplo(){
   git pull origin `branch`
