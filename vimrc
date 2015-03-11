@@ -30,6 +30,8 @@ Plugin 'nelstrom/vim-textobj-rubyblock.git'
 Plugin 'kien/ctrlp.vim.git'
 Plugin 'slim-template/vim-slim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'ngmy/vim-rubocop'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -134,8 +136,6 @@ colorscheme solarized
 "-----------------------------------------------------------
 " Overrides
 
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
-
 "-----------------------------------------------------------
 " Leader
 let mapleader = ","
@@ -146,7 +146,8 @@ map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
 map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
-map <Leader>r :w<CR>:!chrome-cli reload<CR><CR>
+map <Leader>re :w<CR>:!chrome-cli reload<CR><CR>
+map <Leader>rb :RuboCop<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
 
 " Leaders for editing: Open Tab, Split, Vert Split
