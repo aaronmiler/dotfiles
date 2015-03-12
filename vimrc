@@ -17,7 +17,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle
 " " required!
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle'
 
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-git.git'
@@ -31,7 +31,6 @@ Plugin 'kien/ctrlp.vim.git'
 Plugin 'slim-template/vim-slim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ngmy/vim-rubocop'
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -149,6 +148,7 @@ map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
 map <Leader>re :w<CR>:!chrome-cli reload<CR><CR>
 map <Leader>rb :RuboCop<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
+map <Leader>sc :call SCSSLint()<CR>
 
 " Leaders for editing: Open Tab, Split, Vert Split
 map <Leader>e :tabe ./
@@ -173,6 +173,13 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.DS_Store,*.db " Ignore these files,
 
 " Automatically remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+function! SCSSLint()
+  let current_file = shellescape(expand('%s:p'))
+  let cmd = "scss-lint " . current_file
+  let output = system(cmd)
+  echo output
+endfunction
 
 "------------------------------------------------------------
 " Mappings
