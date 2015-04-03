@@ -39,7 +39,7 @@ export PATH=/usr/local/bin:$PATH
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
 # Get Postgres Executable from Postgres.app
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
