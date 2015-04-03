@@ -38,6 +38,8 @@ export PATH=/usr/local/bin/npm:$PATH
 export PATH=/usr/local/bin:$PATH
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
+# Get Postgres Executable from Postgres.app
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
@@ -134,6 +136,10 @@ function gnb {
 # Search down for file
 function search(){
   find ./ -name '[$1]*'
+}
+
+function status(){
+  curl -Is $1 | head -n 1
 }
 
 # Clean up old Swap Files
