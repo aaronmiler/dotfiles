@@ -27,11 +27,11 @@ stty -ixon
 
 ## Exports
 #---------------
-#Heroku
-export PATH="/usr/local/heroku/bin:$PATH"
 # RB Env
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+#Heroku
+export PATH="/usr/local/heroku/bin:$PATH"
 # NPM Bin Path
 export PATH=/usr/local/share/bin/npm:$PATH
 # All the Paths!
