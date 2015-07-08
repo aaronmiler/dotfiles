@@ -33,11 +33,14 @@ export PATH="/usr/local/heroku/bin:$PATH"
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 # NPM Bin Path
-export PATH=/usr/local/bin/npm:$PATH
+export PATH=/usr/local/share/bin/npm:$PATH
 # All the Paths!
 export PATH=/usr/local/bin:$PATH
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
+# Add GO Stuff
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 # Get Postgres Executable from Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 # Make Cask install in /Applications
@@ -48,7 +51,7 @@ alias home='cd ~/'
 alias dotfiles='cd ~/dotfiles'
 alias rs='bundle exec rspec'
 alias h='history | grep'
-alias v='vim'
+alias v='nvim'
 #alias guard='bundle exec guard'
 alias bu='bundle update'
 alias psg='ps aux | grep'
