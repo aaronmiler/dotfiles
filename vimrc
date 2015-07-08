@@ -8,32 +8,33 @@ filetype off
 
 :runtime macros/matchit.vim
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
 
 "------------------------------------------------------------
-" Set up Vunbler/Vundle
+" Set up Plug
 "
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-" " required!
-Plugin 'gmarik/Vundle'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-git'
+Plug 'altercation/vim-colors-solarized'
+Plug 'kchmck/vim-coffee-script'
+Plug 'thoughtbot/vim-rspec'
+Plug 'jgdavey/tslime.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'kien/ctrlp.vim'
+Plug 'slim-template/vim-slim'
+Plug 'scrooloose/nerdtree'
+Plug 'ngmy/vim-rubocop'
+Plug 'benekastah/neomake'
 
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-git.git'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'jgdavey/tslime.vim'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock.git'
-Plugin 'kien/ctrlp.vim.git'
-Plugin 'slim-template/vim-slim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ngmy/vim-rubocop'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 
 " Enable syntax highlighting
 syntax enable
