@@ -174,12 +174,6 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.DS_Store,*.db " Ignore these files,
 
 " Automatically remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
-" Automatically Open NERDTree, and focus on editor
-autocmd VimEnter * NERDTree | wincmd p
-autocmd TabEnter * NERDTree | wincmd p
-
-" Auto Close NERDTree if it's the last thing open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 function! SCSSLint()
   let current_file = shellescape(expand('%s:p'))
