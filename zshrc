@@ -50,6 +50,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 alias home='cd ~/'
 alias dotfiles='cd ~/dotfiles'
 alias rs='bundle exec rspec'
+alias gg='guard --group '
 alias h='history | grep'
 alias v='vim'
 #alias guard='bundle exec guard'
@@ -82,6 +83,7 @@ alias gcom='git checkout master'
 alias grhh='git reset --hard head'
 alias gplom='git pull origin master'
 alias gprom='git pull --rebase origin master'
+alias gignore='git rm -r --cached . && git add .'
 
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
