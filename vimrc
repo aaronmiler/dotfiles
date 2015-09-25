@@ -33,8 +33,17 @@ Plug 'slim-template/vim-slim'
 Plug 'scrooloose/nerdtree'
 Plug 'ngmy/vim-rubocop'
 Plug 'benekastah/neomake'
+Plug 'itchyny/lightline.vim'
+Plug 'elzr/vim-json'
 
 call plug#end()            " required
+
+" Plugin Settings
+
+let g:vim_json_syntax_conceal = 0
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
 
 " Enable syntax highlighting
 syntax enable
