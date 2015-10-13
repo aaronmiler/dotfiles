@@ -45,6 +45,7 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export TERM=xterm-256color
 
 # My Aliases
 alias home='cd ~/'

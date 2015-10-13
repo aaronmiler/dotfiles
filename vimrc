@@ -35,6 +35,7 @@ Plug 'ngmy/vim-rubocop'
 Plug 'benekastah/neomake'
 Plug 'itchyny/lightline.vim'
 Plug 'elzr/vim-json'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()            " required
 
@@ -42,8 +43,18 @@ call plug#end()            " required
 
 let g:vim_json_syntax_conceal = 0
 
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+set laststatus=0
+set noshowmode
+
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
 
 " Enable syntax highlighting
 syntax enable
