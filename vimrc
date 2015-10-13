@@ -166,7 +166,7 @@ map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
 map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
-map <Leader>re :w<CR>:!chrome-cli reload<CR><CR>
+map <Leader>re :w<CR>:!osascript -e 'tell app "Safari"' -e 'do JavaScript "window.location.reload();" in first document' -e 'end'<CR><CR>
 map <Leader>rb :RuboCop<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
 map <Leader>sc :call SCSSLint()<CR>
