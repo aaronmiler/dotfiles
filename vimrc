@@ -36,6 +36,7 @@ Plug 'benekastah/neomake'
 Plug 'itchyny/lightline.vim'
 Plug 'elzr/vim-json'
 Plug 'itchyny/lightline.vim'
+Plug 'elixir-lang/vim-elixir'
 
 call plug#end()            " required
 
