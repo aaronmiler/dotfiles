@@ -20,17 +20,22 @@ prompt_miler_precmd(){
   local gitinfo=$(git_prompt_info)
   local gitinfo_nocolor=$(echo "$gitinfo" | perl -pe "s/%\{[^}]+\}//g")
   local rvm_ruby=''
+  local elixir=''
 
   if which rvm-prompt &> /dev/null; then
     rvm_ruby='%{$fg[red]%}$(rvm-prompt i v g)%{$reset_color%}'
   else
     if which rbenv &> /dev/null; then
-      rvm_ruby='%{$fg[red]%}$(rbenv version | sed -e "s/ (set.*$//")%{$reset_color%}'
+      rvm_ruby='%{$fg[red]%}R:$(rbenv version | sed -e "s/ (set.*$//")%{$reset_color%}'
     fi
   fi
 
+  if which exenv &> /dev/null; then
+    elixir='%{$fg[cyan]%}E:$(exenv version | sed -e "s/ (set.*$//")%{$reset_color%}'
+  fi
+
   PROMPT="$base_prompt$gitinfo$post_prompt"
-  RPROMPT="$rvm_ruby"
+  RPROMPT="$rvm_ruby $elixir"
 }
 
 prompt_setup_miler

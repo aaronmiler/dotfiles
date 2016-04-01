@@ -30,19 +30,30 @@ stty -ixon
 # RB Env
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# EX Env
+export PATH="$HOME/.exenv/bin:$PATH"
+eval "$(exenv init -)"
+
 #Heroku
 export PATH="/usr/local/heroku/bin:$PATH"
+
 # NPM Bin Path
 export PATH=/usr/local/share/bin/npm:$PATH
+
 # All the Paths!
 export PATH=/usr/local/bin:$PATH
+
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
+
 # Add GO Stuff
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
 # Get Postgres Executable from Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
+
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export TERM=xterm-256color
@@ -66,6 +77,7 @@ alias rcp'rails console production'
 alias rs='bundle install && rails server -p 3000'
 alias rg='rails generate'
 alias ogh='hub browse -- ""'
+alias res='touch ./tmp/restart.txt'
 
 # Git Shortcuts
 alias ga='git add'
