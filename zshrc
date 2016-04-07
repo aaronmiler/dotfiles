@@ -204,6 +204,15 @@ function work(){
   fi
 }
 
+# Check Domain Availability
+function domain(){
+  if whois $1 | grep 'No match' -q; then
+    echo $fg[green]The Domain $1 is Available$reset_color
+  else
+    echo $fg[red]The Domain $1 is Taken$reset_color
+  fi
+}
+
 # Push Specified Branch to Heroku as Master
 #function gph(){
 #  branchName=`git symbolic-ref -q --short HEAD`
