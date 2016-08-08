@@ -47,10 +47,6 @@ export PATH=/usr/local/bin:$PATH
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
 
-# Add GO Stuff
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
 # Get Postgres Executable from Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 
@@ -84,11 +80,13 @@ alias ga='git add'
 alias gc='git commit'
 alias gaa='git add --all .'
 alias gbr='git branch'
+alias gco='git checkout'
 alias gdb='git branch -D'
 alias gdh='git diff head'
 alias gfo='git fetch origin'
 alias gph='git push'
 alias gpl='git pull'
+alias gnb='git checkout -b'
 alias gst='git status -sb'
 alias gcma='git commit -C HEAD --amend'
 alias gcof='git checkout HEAD --'
@@ -131,21 +129,10 @@ function gplo(){
   git pull origin `branch`
 }
 function gcm {
-  rogu post "git commit" "`repo` `branch`: $*"
   git commit -m "$*"
   echo 'Push it!'
 }
 
-function gco {
-  rogu post "git checkout" "`repo` $1"
-  git checkout $1
-}
-
-function gnb {
-  git checkout master
-  rogu post "git new branch" "`repo` $1"
-  git checkout -b $1
-}
 # -----------------------------------------
 # Custom Functions
 # -----------------------------------------
