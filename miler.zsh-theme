@@ -30,12 +30,8 @@ prompt_miler_precmd(){
     fi
   fi
 
-  if which exenv &> /dev/null; then
-    elixir='%{$fg[cyan]%}E:$(exenv version | sed -e "s/ (set.*$//")%{$reset_color%}'
-  fi
-
   PROMPT="$base_prompt$gitinfo$post_prompt"
-  RPROMPT="$rvm_ruby $elixir"
+  RPROMPT="$rvm_ruby"
 }
 
 prompt_setup_miler
