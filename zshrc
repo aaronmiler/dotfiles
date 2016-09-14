@@ -27,10 +27,6 @@ stty -ixon
 
 ## Exports
 #---------------
-# RB Env
-PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 # EX Env
 export PATH="$HOME/.exenv/bin:$PATH"
 eval "$(exenv init -)"
@@ -53,6 +49,11 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export TERM=xterm-256color
+
+# RB Env
+PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 
 # My Aliases
 alias home='cd ~/'
