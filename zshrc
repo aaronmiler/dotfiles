@@ -27,10 +27,6 @@ stty -ixon
 
 ## Exports
 #---------------
-# EX Env
-export PATH="$HOME/.exenv/bin:$PATH"
-eval "$(exenv init -)"
-
 #Heroku
 export PATH="/usr/local/heroku/bin:$PATH"
 
@@ -51,7 +47,9 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export TERM=xterm-256color
 
 # RB Env
-PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/shims:$PATH"
+
 eval "$(rbenv init -)"
 
 
@@ -201,6 +199,12 @@ function domain(){
   fi
 }
 
+function ptc() {
+  audience=$1
+  shift
+  pt create "[$audience] $*"
+}
+
 # Push Specified Branch to Heroku as Master
 #function gph(){
 #  branchName=`git symbolic-ref -q --short HEAD`
@@ -213,3 +217,5 @@ function domain(){
 # -----------------------------------------
 # Alias' for Work
 # -----------------------------------------
+
+export PATH="$HOME/.yarn/bin:$PATH"

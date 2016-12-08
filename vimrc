@@ -28,7 +28,7 @@ Plug 'thoughtbot/vim-rspec'
 Plug 'jgdavey/tslime.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'slim-template/vim-slim'
 Plug 'scrooloose/nerdtree'
 Plug 'ngmy/vim-rubocop'
@@ -160,9 +160,11 @@ colorscheme solarized
 "-----------------------------------------------------------
 " Leader
 let mapleader = ","
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-map <Leader>cp :%y+<CR>
 map <Leader>bi :! bundle install<CR><CR>
+map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+map <Leader>cp :%y+<CR>
 map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
