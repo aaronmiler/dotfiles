@@ -72,7 +72,7 @@ alias rcp'rails console production'
 alias rs='bundle install && rails server -p 3000'
 alias rg='rails generate'
 alias ogh='hub browse -- ""'
-alias res='touch ./tmp/restart.txt'
+alias res='touch ./tmp/restart.txt && rm ./tmp/restart.txt'
 
 # Git Shortcuts
 alias ga='git add'
