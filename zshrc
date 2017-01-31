@@ -99,6 +99,8 @@ alias gignore='git rm -r --cached . && git add .'
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
 
+alias deploy='git push heroku && heroku run rake db:migrate && heroku restart'
+
 function gclean() {
   read "REPLY?Clean up merged branches? NOTE: Will delete any branch behind master/with no changes "
   if [[ $REPLY =~ ^[Yy]$ ]]
