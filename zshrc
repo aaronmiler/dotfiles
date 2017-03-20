@@ -106,6 +106,14 @@ function gclean() {
   fi
 }
 
+function gpurge() {
+  read "REPLY?Remove all branches but master?"
+  if [[$REPLY =! ^[Yy]$ ]]
+  then
+    git branch | egrep -v "(master|\*)" | xargs git branch -d
+  fi
+}
+
 # -----------------------------------------
 # Functions for logging git activity
 # -----------------------------------------
