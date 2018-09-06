@@ -60,6 +60,7 @@ alias rs='bundle exec rspec'
 alias gg='guard --group '
 alias h='history | grep'
 alias v='vim'
+alias vt='vim -p'
 #alias guard='bundle exec guard'
 alias bu='bundle update'
 alias psg='ps aux | grep'
@@ -227,3 +228,7 @@ function ptc() {
 # -----------------------------------------
 
 export PATH="$HOME/.yarn/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
