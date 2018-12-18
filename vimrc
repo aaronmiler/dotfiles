@@ -49,8 +49,8 @@ let g:lightline = {
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
       \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
+      \ 'separator': { 'left': '◣ ', 'right': '◀' },
+      \ 'subseparator': { 'left': ' ', 'right': '|' }
       \ }
 set laststatus=0
 set noshowmode
@@ -173,6 +173,11 @@ map <Leader>re :w<CR>:!chrome-cli reload<CR><CR>
 map <Leader>rb :RuboCop<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
 map <Leader>sc :call SCSSLint()<CR>
+
+map <Leader>ls :ls<CR>
+map <Leader>b  :b
+map <Leader>bn :bn<CR>
+map <Leader>bp :bp<CR>
 
 " Leaders for editing: Open Tab, Split, Vert Split
 map <Leader>e :tabe ./
