@@ -151,7 +151,7 @@ set autoread
 "-----------------------------------------------------------
 " Colors!
 
-set background=dark
+set background=light
 colorscheme solarized
 
 "-----------------------------------------------------------
