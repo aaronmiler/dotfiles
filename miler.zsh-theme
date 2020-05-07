@@ -20,7 +20,7 @@ prompt_miler_precmd(){
   local gitinfo=$(git_prompt_info)
   local gitinfo_nocolor=$(echo "$gitinfo" | perl -pe "s/%\{[^}]+\}//g")
   local rvm_ruby=''
-  local elixir=''
+  local node=''
 
   if which rvm-prompt &> /dev/null; then
     rvm_ruby='%{$fg[red]%}$(rvm-prompt i v g)%{$reset_color%}'
@@ -30,8 +30,14 @@ prompt_miler_precmd(){
     fi
   fi
 
+  if which nvm &> /dev/null; then
+    node='%{$fg[blue]%}N:$(nvm current | sed -e "s/ (set.*$//")%{$reset_color%}'
+  fi
+
+
+
   PROMPT="$base_prompt$gitinfo$post_prompt"
-  RPROMPT="$rvm_ruby"
+  RPROMPT="$rvm_ruby $node"
 }
 
 prompt_setup_miler

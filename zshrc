@@ -52,11 +52,36 @@ export PATH="$HOME/.rbenv/shims:$PATH"
 
 eval "$(rbenv init -)"
 
+# NVM
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Automatically use the node version in the given directory
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 # My Aliases
 alias home='cd ~/'
 alias dotfiles='cd ~/dotfiles'
-alias rs='bundle exec rspec'
+alias rs='bundle exec rails server'
 alias gg='guard --group '
 alias h='history | grep'
 alias v='vim'
@@ -70,7 +95,6 @@ alias ls='ls -lhGa'
 # Rails Shortcuts
 alias rc='rails console'
 alias rcp'rails console production'
-alias rs='bundle install && rails server -p 3000'
 alias rg='rails generate'
 alias ogh='hub browse -- ""'
 alias res='touch ./tmp/restart.txt && rm ./tmp/restart.txt'
@@ -116,6 +140,12 @@ function gpurge() {
     git branch | egrep -v "(master|\*)" | xargs git branch -d
   fi
 }
+
+# -----------------------------------------
+# Tools
+# -----------------------------------------
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # -----------------------------------------
 # Functions for logging git activity
@@ -214,6 +244,51 @@ function ptc() {
   audience=$1
   shift
   pt create "[$audience] $*"
+}
+
+function ssl-check() {
+    f=~/.localhost_ssl;
+    ssl_crt=$f/server.crt
+    ssl_key=$f/server.key
+    b=$(tput bold)
+    c=$(tput sgr0)
+
+    local_ip=$(ipconfig getifaddr $(route get default | grep interface | awk '{print $2}'))
+    # local_ip=999.999.999 # (uncomment for testing)
+
+    domains=(
+        "localhost"
+        "$local_ip"
+    )
+
+    if [[ ! -f $ssl_crt ]]; then
+        echo -e "\n🛑  ${b}Couldn't find a Slate SSL certificate:${c}"
+        make_key=true
+    elif [[ ! $(openssl x509 -noout -text -in $ssl_crt | grep $local_ip) ]]; then
+        echo -e "\n🛑  ${b}Your IP Address has changed:${c}"
+        make_key=true
+    else
+        echo -e "\n✅  ${b}Your IP address is still the same.${c}"
+    fi
+
+    if [[ $make_key == true ]]; then
+        echo -e "Generating a new Slate SSL certificate...\n"
+        count=$(( ${#domains[@]} - 1))
+        mkcert ${domains[@]}
+
+        # Create Slate's default certificate directory, if it doesn't exist
+        test ! -d $f && mkdir $f
+
+        # It appears mkcert bases its filenames off the number of domains passed after the first one.
+        # This script predicts that filename, so it can copy it to Slate's default location.
+        if [[ $count = 0 ]]; then
+            mv ./localhost.pem $ssl_crt
+            mv ./localhost-key.pem $ssl_key
+        else
+            mv ./localhost+$count.pem $ssl_crt
+            mv ./localhost+$count-key.pem $ssl_key
+        fi
+    fi
 }
 
 # Push Specified Branch to Heroku as Master
