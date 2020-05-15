@@ -101,7 +101,7 @@ alias rc='rails console'
 alias rcp'rails console production'
 alias rg='rails generate'
 alias ogh='hub browse -- ""'
-alias res='touch ./tmp/restart.txt && rm ./tmp/restart.txt'
+alias res='touch ./tmp/restart.txt'
 
 # Git Shortcuts
 alias ga='git add'
@@ -110,7 +110,7 @@ alias gaa='git add --all .'
 alias gbr='git branch'
 alias gco='git checkout'
 alias gdb='git branch -D'
-alias gdh='git diff head'
+alias gdh='git diff -- HEAD'
 alias gfo='git fetch origin'
 alias gph='git push'
 alias gpl='git pull'
@@ -308,8 +308,14 @@ function ssl-check() {
 # Alias' for Work
 # -----------------------------------------
 
+alias sanaserver="foreman start -f Procfile.local"
+
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ ! $(uname -s) = "Darwin" ]; then
+  cd /home/vagrant/origami_claims
+fi

@@ -41,3 +41,5 @@ Thumbs.db
 Gemfile.local
 Gemfile.local.lock
 *.csv
+
+Procfile.local
