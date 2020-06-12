@@ -37,8 +37,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'elzr/vim-json'
 Plug 'itchyny/lightline.vim'
 Plug 'elixir-lang/vim-elixir'
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
 
 call plug#end()            " required
 
@@ -153,7 +151,7 @@ set autoread
 "-----------------------------------------------------------
 " Colors!
 
-set background=dark
+set background=light
 colorscheme solarized
 
 "-----------------------------------------------------------
@@ -171,11 +169,10 @@ map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
 map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
-map <Leader>re :w<CR>:!touch ./tmp/restart.txt<CR><CR>
+map <Leader>re :w<CR>:!chrome-cli reload<CR><CR>
 map <Leader>rb :RuboCop<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
 map <Leader>sc :call SCSSLint()<CR>
-map <Leader>js :call ESLint()<CR>
 
 map <Leader>ls :ls<CR>
 map <Leader>b  :b
@@ -209,13 +206,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 function! SCSSLint()
   let current_file = shellescape(expand('%s:p'))
   let cmd = "scss-lint " . current_file
-  let output = system(cmd)
-  echo output
-endfunction
-
-function! ESLint()
-  let current_file = shellescape(expand('%s:p'))
-  let cmd = "eslint " . current_file
   let output = system(cmd)
   echo output
 endfunction
