@@ -97,9 +97,9 @@ alias rerc='. ~/.zshrc'
 alias ls='ls -lhGa'
 
 # Rails Shortcuts
-alias rc='rails console'
+alias rc='bundle exec rails console'
 alias rcp'rails console production'
-alias rg='rails generate'
+alias rg='bundle exec rails generate'
 alias ogh='hub browse -- ""'
 alias res='touch ./tmp/restart.txt'
 
@@ -308,8 +308,6 @@ function ssl-check() {
 # -----------------------------------------
 # Alias' for Work
 # -----------------------------------------
-
-alias sanaserver="foreman start -f Procfile.local"
 
 export PATH="$HOME/.yarn/bin:$PATH"
 

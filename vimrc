@@ -37,6 +37,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'elzr/vim-json'
 Plug 'itchyny/lightline.vim'
 Plug 'elixir-lang/vim-elixir'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'noprompt/vim-yardoc'
 
 call plug#end()            " required
 
@@ -161,6 +164,7 @@ colorscheme solarized
 " Leader
 let mapleader = ","
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:vimrubocop_config = './.rubocop.yml'
 
 map <Leader>bi :! bundle install<CR><CR>
 map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
