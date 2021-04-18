@@ -111,7 +111,7 @@ alias gaa='git add --all .'
 alias gbr='git branch'
 alias gco='git checkout'
 alias gdb='git branch -D'
-alias gdh='git diff -- HEAD'
+alias gdh='git diff HEAD'
 alias gfo='git fetch origin'
 alias gph='git push'
 alias gpl='git pull'
@@ -128,8 +128,6 @@ alias gignore='git rm -r --cached . && git add .'
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
 
-alias deploy='git push heroku && heroku run rake db:migrate && heroku restart'
-
 function gclean() {
   read "REPLY?Clean up merged branches? NOTE: Will delete any branch behind master/with no changes "
   if [[ $REPLY =~ ^[Yy]$ ]]
@@ -144,6 +142,10 @@ function gpurge() {
   then
     git branch | egrep -v "(master|\*)" | xargs git branch -d
   fi
+}
+
+function dconsole() {
+  docker exec -it `docker ps --format "{{.ID}}" --filter name="$1"` bundle exec rails console
 }
 
 # -----------------------------------------
