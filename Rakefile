@@ -2,7 +2,7 @@ require 'rake'
 
 desc "install the dot files into user's home directory"
 task :install do |t, args|
-  replace_all = ARGV[1] || false
+  replace_all = (ENV["FORCE"] == true) || false
   link_zsh_theme
   Dir['*'].each do |file|
     next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme aaronmiler.itermcolors].include? file
