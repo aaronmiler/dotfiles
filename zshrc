@@ -86,7 +86,7 @@ fi
 alias home='cd ~/'
 alias dotfiles='cd ~/dotfiles'
 alias rs='bundle exec rails server'
-alias gg='guard --group '
+alias gg='bundle exec guard --group '
 alias h='history | grep'
 alias v='vim'
 alias vt='vim -p'
@@ -102,6 +102,10 @@ alias rcp'rails console production'
 alias rg='bundle exec rails generate'
 alias ogh='hub browse -- ""'
 alias res='touch ./tmp/restart.txt'
+
+function newapp() {
+  rails new $1 -T -S -d postgresql -m ~/Documents/template/template.rb --skip-gemfile --skip-spring
+}
 
 # Git Shortcuts
 alias ga='git add'
@@ -253,50 +257,16 @@ function ptc() {
   pt create "[$audience] $*"
 }
 
-function ssl-check() {
-    f=~/.localhost_ssl;
-    ssl_crt=$f/server.crt
-    ssl_key=$f/server.key
-    b=$(tput bold)
-    c=$(tput sgr0)
-
-    local_ip=$(ipconfig getifaddr $(route get default | grep interface | awk '{print $2}'))
-    # local_ip=999.999.999 # (uncomment for testing)
-
-    domains=(
-        "localhost"
-        "$local_ip"
-    )
-
-    if [[ ! -f $ssl_crt ]]; then
-        echo -e "\n🛑  ${b}Couldn't find a Slate SSL certificate:${c}"
-        make_key=true
-    elif [[ ! $(openssl x509 -noout -text -in $ssl_crt | grep $local_ip) ]]; then
-        echo -e "\n🛑  ${b}Your IP Address has changed:${c}"
-        make_key=true
-    else
-        echo -e "\n✅  ${b}Your IP address is still the same.${c}"
-    fi
-
-    if [[ $make_key == true ]]; then
-        echo -e "Generating a new Slate SSL certificate...\n"
-        count=$(( ${#domains[@]} - 1))
-        mkcert ${domains[@]}
-
-        # Create Slate's default certificate directory, if it doesn't exist
-        test ! -d $f && mkdir $f
-
-        # It appears mkcert bases its filenames off the number of domains passed after the first one.
-        # This script predicts that filename, so it can copy it to Slate's default location.
-        if [[ $count = 0 ]]; then
-            mv ./localhost.pem $ssl_crt
-            mv ./localhost-key.pem $ssl_key
-        else
-            mv ./localhost+$count.pem $ssl_crt
-            mv ./localhost+$count-key.pem $ssl_key
-        fi
-    fi
-}
+alias dexec='docker exec -it `basename "$PWD"`_app_1'
+alias build='docker compose build'
+alias rebuild='docker compose build && docker compose up'
+alias up='docker compose up'
+alias migrate='dexec rake db:migrate'
+alias rollback='dexec rake db:rollback'
+alias remigrate="dexec rake db:migrate:redo"
+alias console='dexec rails console'
+#alias guard='docker-compose run --rm app guard --force-polling -w spec/'
+alias guard='docker-compose run --rm app guard --force-polling -w spec/'
 
 # Push Specified Branch to Heroku as Master
 #function gph(){
