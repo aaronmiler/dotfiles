@@ -107,6 +107,14 @@ function newapp() {
   rails new $1 -T -S -d postgresql -m ~/Documents/template/template.rb --skip-gemfile --skip-spring
 }
 
+function mainBranch() {
+  if git show-ref -q --heads main; then
+    echo "main"
+  else
+    echo "master"
+  fi
+}
+
 # Git Shortcuts
 alias ga='git add'
 alias gc='git commit'
@@ -123,10 +131,10 @@ alias gnb='git checkout -b'
 alias gst='git status -sb'
 alias gcma='git commit -C HEAD --amend'
 alias gcof='git checkout HEAD --'
-alias gcom='git checkout master; git pull origin master'
+alias gcom='git checkout $(mainBranch); git pull origin $(mainBranch)'
 alias grhh='git reset --hard head'
-alias gplom='git pull origin master'
-alias gprom='git pull --rebase origin master'
+alias gplom='git pull origin $(mainBranch)'
+alias gprom='git pull --rebase origin $(mainBranch)'
 alias gignore='git rm -r --cached . && git add .'
 
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
@@ -136,7 +144,7 @@ function gclean() {
   read "REPLY?Clean up merged branches? NOTE: Will delete any branch behind master/with no changes "
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
-    git branch --merged | grep -v '.master$' | grep -v '.production$' | xargs git branch -d
+    git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
   fi
 }
 
@@ -157,6 +165,7 @@ function dconsole() {
 # -----------------------------------------
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+  [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # -----------------------------------------
 # Functions for logging git activity
@@ -171,7 +180,7 @@ function branch {
 }
 # Git Push (Current Branch) Origin
 function gpho(){
-  git push origin `branch`
+  git push origin `branch` -u
 }
 function gphof(){
   git push origin `branch` -f
@@ -257,16 +266,17 @@ function ptc() {
   pt create "[$audience] $*"
 }
 
-alias dexec='docker exec -it `basename "$PWD"`_app_1'
+alias dexec='docker exec -it `basename "$PWD"`-app-1'
 alias build='docker compose build'
 alias rebuild='docker compose build && docker compose up'
 alias up='docker compose up'
-alias migrate='dexec rake db:migrate'
-alias rollback='dexec rake db:rollback'
-alias remigrate="dexec rake db:migrate:redo"
-alias console='dexec rails console'
+alias migrate='dexec bundle exec rake db:migrate'
+alias rollback='dexec bundle exec rake db:rollback'
+alias remigrate="dexec bundle exec rake db:migrate:redo"
+alias console='dexec bundle exec rails console'
+alias generate='dexec bundle exec rails g'
 #alias guard='docker-compose run --rm app guard --force-polling -w spec/'
-alias guard='docker-compose run --rm app guard --force-polling -w spec/'
+alias guard='dexec bundle exec guard'
 
 # Push Specified Branch to Heroku as Master
 #function gph(){
