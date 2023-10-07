@@ -3,6 +3,7 @@ ZSH=$HOME/.oh-my-zsh
 
 # Theme Declaration
 ZSH_THEME='miler'
+EDITOR="vim"
 
 # Plugins
 plugins=(sublime bundler gem)
@@ -38,6 +39,7 @@ export PATH=/usr/local/bin:$PATH
 
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Get Postgres Executable from Postgres.app
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
@@ -276,16 +278,8 @@ alias remigrate="dexec bundle exec rake db:migrate:redo"
 alias console='dexec bundle exec rails console'
 alias generate='dexec bundle exec rails g'
 #alias guard='docker-compose run --rm app guard --force-polling -w spec/'
-alias guard='dexec bundle exec guard'
-
-# Push Specified Branch to Heroku as Master
-#function gph(){
-#  branchName=`git symbolic-ref -q --short HEAD`
-#  git checkout $1
-#  git rebase $branchName
-#  git push heroku $1:master -f
-#  git checkout $branchName
-#}
+alias guard='docker compose exec -e VITE_RUBY_AUTO_BUILD=true app bundle exec guard'
+alias vgs="docker compose exec cli vgs"
 
 # -----------------------------------------
 # Alias' for Work
@@ -296,7 +290,3 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-if [ ! $(uname -s) = "Darwin" ]; then
-  cd /home/vagrant/origami_claims
-fi

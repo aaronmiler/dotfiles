@@ -20,26 +20,37 @@ endif
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-git'
 Plug 'altercation/vim-colors-solarized'
-Plug 'kchmck/vim-coffee-script'
-Plug 'thoughtbot/vim-rspec'
-Plug 'jgdavey/tslime.vim'
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'slim-template/vim-slim'
-Plug 'scrooloose/nerdtree'
-Plug 'ngmy/vim-rubocop'
-Plug 'benekastah/neomake'
-Plug 'itchyny/lightline.vim'
 Plug 'elzr/vim-json'
 Plug 'itchyny/lightline.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'yuezk/vim-js'
+Plug 'jgdavey/tslime.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'dense-analysis/ale'
+Plug 'kana/vim-textobj-user'
+Plug 'kchmck/vim-coffee-script'
+Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'rfdavid/rubocop-auto9'
 Plug 'noprompt/vim-yardoc'
+Plug 'slim-template/vim-slim'
+Plug 'scrooloose/nerdtree'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-git'
+Plug 'vim-test/vim-test'
+Plug 'yuezk/vim-js'
+
+" Lint Settings
+
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '>'
+let g:ale_sign_column_always = 1
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+highlight ALEErrorSign ctermbg=NONE ctermfg=Red
+highlight ALEWarningSign ctermbg=Yellow
 
 call plug#end()            " required
 
@@ -58,12 +69,17 @@ let g:lightline = {
 set laststatus=0
 set noshowmode
 
+
 " All of your Plugins must be added before the following line
 
 " Enable syntax highlighting
 syntax enable
 
 filetype plugin indent on    " required
+
+" vim-test Settings
+let test#ruby#rspec#options='--color -format documentation --fail-fast'
+let test#ruby#rspec#executable='docker compose exec app rspec'
 
 "------------------------------------------------------------
 " These are highly recommended options.
@@ -156,7 +172,6 @@ set autoread
 "-----------------------------------------------------------
 " Colors!
 
-set background=dark
 colorscheme solarized
 
 "-----------------------------------------------------------
@@ -238,6 +253,7 @@ nnoremap <Space> :noh<cr>
 " Control S to save
 map <c-s> <esc>:w<CR>
 imap <c-s> <esc>:w<CR>
+nmap <c-p> <esc>:GFiles<CR>
 
 " Remap Semicolon to Colon
 nnoremap ; :
