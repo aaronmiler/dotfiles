@@ -299,7 +299,7 @@ export NVM_DIR="$HOME/.nvm"
 # Caprover Server Utilities
 # -----------------------------------------
 function capexec(){
-  docker exec -it `docker ps --filter name=$1 --format "{{.ID}}"` $2
+  docker exec -it `docker ps --filter name=$1 --format "{{.ID}}"` ${@:2}
 }
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
