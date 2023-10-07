@@ -28,6 +28,8 @@ task :install do |t, args|
       link_file(file)
     end
   end
+  # Link the global Gitignore file
+  `git config --global core.excludesfile "~/.gitignore"`
 end
 
 task :install_theme do

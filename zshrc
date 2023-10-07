@@ -41,8 +41,11 @@ export PATH=/usr/local/bin:$PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 
-# Get Postgres Executable from Postgres.app
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
+# Get Postgres
+export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@13/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@13/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@13/lib/pkgconfig"
 
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -51,6 +54,7 @@ export TERM=xterm-256color
 # RB Env
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.rbenv/shims:$PATH"
+export PATH="/opt/cloud66/bin:${PATH}"
 
 if which rbenv &> /dev/null; then
   eval "$(rbenv init -)"
@@ -61,7 +65,6 @@ if which nvm &> /dev/null; then
   export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-  # Automatically use the node version in the given directory
   autoload -U add-zsh-hook
   load-nvmrc() {
     local node_version="$(nvm version)"
@@ -106,7 +109,8 @@ alias ogh='hub browse -- ""'
 alias res='touch ./tmp/restart.txt'
 
 function newapp() {
-  rails new $1 -T -S -d postgresql -m ~/Documents/template/template.rb --skip-gemfile --skip-spring
+  rails new $1 -T -S -d postgresql -m ~/Documents/Projects/starter_template/template.rb \
+    --skip-gemfile --skip-spring --skip-asset-pipeline --skip-javascript
 }
 
 function mainBranch() {
@@ -126,7 +130,7 @@ alias gbr='git branch'
 alias gco='git checkout'
 alias gdb='git branch -D'
 alias gdh='git diff HEAD'
-alias gfo='git fetch origin'
+alias gfo='git fetch origin -p'
 alias gph='git push'
 alias gpl='git pull'
 alias gnb='git checkout -b'
@@ -140,7 +144,7 @@ alias gprom='git pull --rebase origin $(mainBranch)'
 alias gignore='git rm -r --cached . && git add .'
 
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
-alias glg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset" --abbrev-commit'
+alias glg="git log --graph --all --abbrev-commit --pretty='format:%C(auto)%h %C(cyan)%ar %C(auto)%d %C(magenta)%an %C(auto)%s'"
 
 function gclean() {
   read "REPLY?Clean up merged branches? NOTE: Will delete any branch behind master/with no changes "
@@ -182,7 +186,7 @@ function branch {
 }
 # Git Push (Current Branch) Origin
 function gpho(){
-  git push origin `branch` -u
+  git push origin -u `branch`
 }
 function gphof(){
   git push origin `branch` -f
@@ -262,16 +266,16 @@ function domain(){
   fi
 }
 
-function ptc() {
-  audience=$1
-  shift
-  pt create "[$audience] $*"
+function syscolor(){
+  scolor=`defaults read -g AppleInterfaceStyle 2> /dev/null || echo 'light'`
+  awk '{print tolower($0)}' <<<"${scolor}"
 }
 
 alias dexec='docker exec -it `basename "$PWD"`-app-1'
 alias build='docker compose build'
 alias rebuild='docker compose build && docker compose up'
 alias up='docker compose up'
+alias drake='dexec bundle exec rake'
 alias migrate='dexec bundle exec rake db:migrate'
 alias rollback='dexec bundle exec rake db:rollback'
 alias remigrate="dexec bundle exec rake db:migrate:redo"
@@ -290,3 +294,19 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# -----------------------------------------
+# Caprover Server Utilities
+# -----------------------------------------
+function capexec(){
+  docker exec -it `docker ps --filter name=$1 --format "{{.ID}}"` $2
+}
+
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig"
+export optflags="-Wno-error=implicit-function-declaration"
+export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
