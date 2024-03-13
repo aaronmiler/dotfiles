@@ -87,6 +87,14 @@ if which nvm &> /dev/null; then
   load-nvmrc
 fi
 
+# Startup
+if ! ssh-add -l &> /dev/null; then
+  echo "****************************"
+  echo "SSH Key not added"
+  echo "****************************"
+  ssh-add
+fi
+
 # My Aliases
 alias home='cd ~/'
 alias dotfiles='cd ~/dotfiles'
