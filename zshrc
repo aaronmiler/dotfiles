@@ -154,6 +154,21 @@ alias gignore='git rm -r --cached . && git add .'
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg="git log --graph --all --abbrev-commit --pretty='format:%C(auto)%h %C(cyan)%ar %C(auto)%d %C(magenta)%an %C(auto)%s'"
 
+# Recently Checked out Branches
+alias grec="git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short) %(committerdate:relative)' | head -n 10"
+
+function gcot() {
+  local tick_num=$1
+  local branch_name=$(git branch --list | grep -oE "aaron\.[a-zA-Z]{3}-$tick_num(\.[a-zA-Z0-9_-]+)?")
+
+  if [ -z "$branch_name" ]; then
+    echo "No branch found for ticket number ${tick_num}."
+    return 1
+  fi
+
+  git checkout "${branch_name}"
+}
+
 function gclean() {
   read "REPLY?Clean up merged branches? NOTE: Will delete any branch behind master/with no changes "
   if [[ $REPLY =~ ^[Yy]$ ]]
