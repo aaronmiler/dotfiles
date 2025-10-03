@@ -92,19 +92,16 @@ if ! ssh-add -l &> /dev/null; then
   echo "****************************"
   echo "SSH Key not added"
   echo "****************************"
-  ssh-add
 fi
+
+bindkey "^C" send-break
 
 # My Aliases
 alias home='cd ~/'
 alias dotfiles='cd ~/dotfiles'
-alias rs='bundle exec rails server'
-alias gg='bundle exec guard --group '
 alias h='history | grep'
 alias v='vim'
 alias vt='vim -p'
-#alias guard='bundle exec guard'
-alias bu='bundle update'
 alias psg='ps aux | grep'
 alias rerc='. ~/.zshrc'
 alias ls='ls -lhGa'
@@ -295,10 +292,12 @@ function syscolor(){
   awk '{print tolower($0)}' <<<"${scolor}"
 }
 
+alias dc='docker compose'
 alias dexec='docker exec -it `basename "$PWD"`-app-1'
-alias build='docker compose build'
-alias rebuild='docker compose build && docker compose up'
-alias up='docker compose up'
+alias build='dc build'
+alias rebuild='dc build && dc up'
+alias up='dc up'
+
 alias drake='dexec bundle exec rake'
 alias migrate='dexec bundle exec rake db:migrate'
 alias rollback='dexec bundle exec rake db:rollback'
@@ -306,8 +305,8 @@ alias remigrate="dexec bundle exec rake db:migrate:redo"
 alias console='dexec bundle exec rails console'
 alias generate='dexec bundle exec rails g'
 #alias guard='docker-compose run --rm app guard --force-polling -w spec/'
-alias guard='docker compose exec -e VITE_RUBY_AUTO_BUILD=true app bundle exec guard'
-alias vgs="docker compose exec cli vgs"
+alias guard='dc exec -e VITE_RUBY_AUTO_BUILD=true app bundle exec guard'
+alias vgs="dc exec cli vgs"
 
 # -----------------------------------------
 # Alias' for Work
@@ -318,13 +317,6 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# -----------------------------------------
-# Caprover Server Utilities
-# -----------------------------------------
-function capexec(){
-  docker exec -it `docker ps --filter name=$1 --format "{{.ID}}"` ${@:2}
-}
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export LDFLAGS="-L/opt/homebrew/opt/readline/lib"

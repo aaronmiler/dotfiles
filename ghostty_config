@@ -1,0 +1,3 @@
+font-family = "Hack"
+theme = dark:Builtin Solarized Dark,light:Builtin Solarized Light
+shell-integration-features = no-cursor,no-sudo,no-title

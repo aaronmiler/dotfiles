@@ -2,11 +2,11 @@ require 'rake'
 
 desc "install the dot files into user's home directory"
 task :install do |t, args|
-  replace_all = (ENV["FORCE"] == 'true') || false
+  replace_all = (ENV["FORCE"] == "true") || false
   link_zsh_theme
-  Dir['*'].each do |file|
-    next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme aaronmiler.itermcolors].include? file
-
+  link_ghostty_config
+  dotfiles = %w[ gemrc nvimrc pryrc vimrc zshrc ]
+  dotfiles.each do |file|
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
         replace_file(file)
@@ -50,4 +50,11 @@ def link_zsh_theme
   file = "miler.zsh-theme"
   puts "linking ZSH theme"
   system %Q{ln -s "$PWD/#{file}" "$HOME/.oh-my-zsh/themes/#{file}"}
+end
+
+def link_ghostty_config
+  file = "ghostty_config"
+  puts "linking Ghostty config"
+  system %Q(mkdir -p ~/.config/ghostty)
+  system %Q{ln -s "$PWD/#{file}" "$HOME/.config/ghostty/config"}
 end
