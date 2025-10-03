@@ -26,15 +26,12 @@ Plug 'itchyny/lightline.vim'
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'dense-analysis/ale'
 Plug 'kana/vim-textobj-user'
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'rfdavid/rubocop-auto9'
 Plug 'noprompt/vim-yardoc'
-Plug 'slim-template/vim-slim'
 Plug 'scrooloose/nerdtree'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-rails'
@@ -43,14 +40,6 @@ Plug 'vim-test/vim-test'
 Plug 'yuezk/vim-js'
 
 " Lint Settings
-
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '>'
-let g:ale_sign_column_always = 1
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-highlight ALEErrorSign ctermbg=NONE ctermfg=Red
-highlight ALEWarningSign ctermbg=Yellow
 
 call plug#end()            " required
 
@@ -180,7 +169,8 @@ colorscheme solarized
 "-----------------------------------------------------------
 " Leader
 let mapleader = ","
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" Is this fighting with fzf?
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:vimrubocop_config = './.rubocop.yml'
 
 map <Leader>bi :! bundle install<CR><CR>
@@ -191,9 +181,7 @@ map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
 map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
 map <Leader>re :w<CR>:!touch ./tmp/restart.txt<CR><CR>
-map <Leader>rb :RuboCop<CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
-map <Leader>sc :call SCSSLint()<CR>
 
 map <Leader>ls :ls<CR>
 map <Leader>b  :b
@@ -224,13 +212,6 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.DS_Store,*.db " Ignore these files,
 " Automatically remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-function! SCSSLint()
-  let current_file = shellescape(expand('%s:p'))
-  let cmd = "scss-lint " . current_file
-  let output = system(cmd)
-  echo output
-endfunction
-
 "------------------------------------------------------------
 " Mappings
 
@@ -242,10 +223,11 @@ map Y y$
 imap jk <ESC>
 
 " Don't use the arrow keys
-noremap <up>    :echoerr 'USE K TO GO UP'<CR>
-noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
-noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
-noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
+" Oct 2025 - Removing these, cause I'm trained enough at this point
+" noremap <up>    :echoerr 'USE K TO GO UP'<CR>
+" noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
+" noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
+" noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
 
 " Clear last search highlight
 nnoremap <Space> :noh<cr>
