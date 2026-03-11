@@ -20,7 +20,7 @@ endif
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
+Plug 'jan-warchol/selenized', { 'rtp': 'editors/vim' }
 Plug 'elzr/vim-json'
 Plug 'itchyny/lightline.vim'
 Plug 'jgdavey/tslime.vim'
@@ -40,6 +40,13 @@ Plug 'vim-test/vim-test'
 Plug 'yuezk/vim-js'
 
 " Lint Settings
+" let g:ale_sign_error = 'x'
+" let g:ale_sign_warning = '>'
+" let g:ale_sign_column_always = 1
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
+" highlight ALEErrorSign ctermbg=NONE ctermfg=Red
+" highlight ALEWarningSign ctermbg=Yellow
 
 call plug#end()            " required
 
@@ -48,7 +55,7 @@ call plug#end()            " required
 let g:vim_json_syntax_conceal = 0
 
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'selenized',
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
       \ },
@@ -161,7 +168,8 @@ set autoread
 "-----------------------------------------------------------
 " Colors!
 
-colorscheme solarized
+set termguicolors
+colorscheme selenized
 
 "-----------------------------------------------------------
 " Overrides
@@ -233,9 +241,10 @@ imap jk <ESC>
 nnoremap <Space> :noh<cr>
 
 " Control S to save
-map <c-s> <esc>:w<CR>
-imap <c-s> <esc>:w<CR>
-nmap <c-p> <esc>:GFiles<CR>
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
+nnoremap <C-p> :GFiles<CR>
+inoremap <C-p> <Esc>:GFiles<CR>
 
 " Remap Semicolon to Colon
 nnoremap ; :

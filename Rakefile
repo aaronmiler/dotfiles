@@ -5,8 +5,9 @@ task :install do |t, args|
   replace_all = (ENV["FORCE"] == "true") || false
   link_zsh_theme
   link_ghostty_config
-  dotfiles = %w[ gemrc nvimrc pryrc vimrc zshrc ]
-  dotfiles.each do |file|
+  Dir['*'].each do |file|
+    next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme ghostty-config].include? file
+
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
         replace_file(file)
@@ -53,8 +54,19 @@ def link_zsh_theme
 end
 
 def link_ghostty_config
-  file = "ghostty_config"
-  puts "linking Ghostty config"
-  system %Q(mkdir -p ~/.config/ghostty)
-  system %Q{ln -s "$PWD/#{file}" "$HOME/.config/ghostty/config"}
+  ghostty_dir = File.join(ENV['HOME'], 'Library', 'Application Support', 'com.mitchellh.ghostty')
+  ghostty_config = File.join(ghostty_dir, 'config')
+
+  unless Dir.exist?(ghostty_dir)
+    puts "creating #{ghostty_dir}"
+    system %Q{mkdir -p "#{ghostty_dir}"}
+  end
+
+  if File.exist?(ghostty_config) || File.symlink?(ghostty_config)
+    puts "removing existing ghostty config"
+    system %Q{rm "#{ghostty_config}"}
+  end
+
+  puts "linking ghostty config"
+  system %Q{ln -s "$PWD/ghostty-config" "#{ghostty_config}"}
 end

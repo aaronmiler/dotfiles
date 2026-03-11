@@ -8,6 +8,9 @@ EDITOR="vim"
 # Plugins
 plugins=(sublime bundler gem)
 
+autoload -Uz compinit
+compinit
+
 # Example aliases
 # alias zshconfig='mate ~/.zshrc'
 # alias ohmyzsh='mate ~/.oh-my-zsh'
@@ -31,21 +34,23 @@ stty -ixon
 #Heroku
 export PATH="/usr/local/heroku/bin:$PATH"
 
+
 # NPM Bin Path
 export PATH=/usr/local/share/bin/npm:$PATH
 
 # All the Paths!
 export PATH=/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # Make sure Brew comes before others
 export PATH="/usr/local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 
 # Get Postgres
-export PATH="/opt/homebrew/opt/postgresql@13/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/postgresql@13/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/postgresql@13/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@13/lib/pkgconfig"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@17/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@17/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@17/lib/pkgconfig"
 
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -105,11 +110,21 @@ alias vt='vim -p'
 alias psg='ps aux | grep'
 alias rerc='. ~/.zshrc'
 alias ls='ls -lhGa'
+function cop() {
+    cat "$1" | pbcopy
+}
+
+# Define custom completion function
+function _cop() {
+    _arguments \
+        '1:file:_files'
+}
+
+compdef _cop cop
 
 # Rails Shortcuts
 alias rc='bundle exec rails console'
 alias rcp'rails console production'
-alias rg='bundle exec rails generate'
 alias ogh='hub browse -- ""'
 alias res='touch ./tmp/restart.txt'
 
@@ -148,6 +163,7 @@ alias grhh='git reset --hard head'
 alias gplom='git pull origin $(mainBranch)'
 alias gprom='git pull --rebase origin $(mainBranch)'
 alias gignore='git rm -r --cached . && git add .'
+alias esld="yarn eslint \$(git diff --name-only \$(git merge-base HEAD origin/main) | grep -E '\.(js|jsx|ts|tsx)$' | xargs -I {} sh -c 'test -f {} && echo {}' | tr '\n' ' ')"
 
 # Fancy Git logs, stolen from http://fredkschott.com/post/2014/02/git-log-is-so-2005/
 alias glg="git log --graph --all --abbrev-commit --pretty='format:%C(auto)%h %C(cyan)%ar %C(auto)%d %C(magenta)%an %C(auto)%s'"
@@ -300,7 +316,7 @@ alias up='dc up'
 
 alias drake='dexec bundle exec rake'
 alias migrate='dexec bundle exec rake db:migrate'
-alias rollback='dexec bundle exec rake db:rollback'
+alias rollback='f() { if [ $# -eq 0 ]; then dexec bundle exec rake db:rollback; else dexec bundle exec rake db:migrate VERSION=$1; fi; }; f'
 alias remigrate="dexec bundle exec rake db:migrate:redo"
 alias console='dexec bundle exec rails console'
 alias generate='dexec bundle exec rails g'

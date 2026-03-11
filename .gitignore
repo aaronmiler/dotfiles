@@ -1,2 +1,4 @@
 vim/plugged/*
 vim/autoload/plug.vim
+vim/tmp
+vim/.netrwhist
