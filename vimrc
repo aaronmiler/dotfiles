@@ -55,7 +55,7 @@ call plug#end()            " required
 let g:vim_json_syntax_conceal = 0
 
 let g:lightline = {
-      \ 'colorscheme': 'selenized',
+      \ 'colorscheme': 'solarized',
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
       \ },
