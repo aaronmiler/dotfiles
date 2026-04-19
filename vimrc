@@ -1,10 +1,8 @@
 "------------------------------------------------------------
 " Features
 "
-" Set 'nocompatible' to ward off unexpected things that your distro might
-" have made, as well as sanely reset options when re-sourcing .vimrc
-set nocompatible
-filetype off
+let &t_TI = ""
+let &t_TE = ""
 
 :runtime macros/matchit.vim
 
@@ -33,22 +31,11 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'noprompt/vim-yardoc'
 Plug 'scrooloose/nerdtree'
-Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-git'
-Plug 'vim-test/vim-test'
 Plug 'yuezk/vim-js'
 
-" Lint Settings
-" let g:ale_sign_error = 'x'
-" let g:ale_sign_warning = '>'
-" let g:ale_sign_column_always = 1
-" highlight clear ALEErrorSign
-" highlight clear ALEWarningSign
-" highlight ALEErrorSign ctermbg=NONE ctermfg=Red
-" highlight ALEWarningSign ctermbg=Yellow
-
-call plug#end()            " required
+call plug#end()
 
 " Plugin Settings
 
@@ -57,25 +44,17 @@ let g:vim_json_syntax_conceal = 0
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
+      \   'readonly': '%{&readonly?"":""}',
       \ },
       \ 'separator': { 'left': '◣ ', 'right': '◀' },
       \ 'subseparator': { 'left': ' ', 'right': '|' }
       \ }
-set laststatus=0
 set noshowmode
-
-
-" All of your Plugins must be added before the following line
 
 " Enable syntax highlighting
 syntax enable
 
-filetype plugin indent on    " required
-
-" vim-test Settings
-let test#ruby#rspec#options='--color -format documentation --fail-fast'
-let test#ruby#rspec#executable='docker compose exec app rspec'
+filetype plugin indent on
 
 "------------------------------------------------------------
 " These are highly recommended options.
@@ -86,17 +65,11 @@ set hidden
 set wildmenu
 set showcmd
 
-" Searches
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
 "------------------------------------------------------------
 " Usability options
-"
 
-" Use case insensitive search, except when using capital letters
+set hlsearch
+set incsearch
 set ignorecase
 set smartcase
 set backspace=indent,eol,start
@@ -106,8 +79,6 @@ set backspace=indent,eol,start
 set autoindent
 
 " Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
-" coming from other editors would expect.
 set nostartofline
 
 set ruler
@@ -127,9 +98,7 @@ set notimeout ttimeout ttimeoutlen=200
 
 "------------------------------------------------------------
 " Indentation options
-"
 
-" Indentation settings for using 2 spaces instead of tabs.
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -145,14 +114,12 @@ set winminheight=5
 set winheight=999
 
 " Easier Split Navigation
-
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Split Opening
-
 set splitbelow
 set splitright
 
@@ -172,22 +139,16 @@ set termguicolors
 colorscheme selenized
 
 "-----------------------------------------------------------
-" Overrides
-
-"-----------------------------------------------------------
 " Leader
 let mapleader = ","
-" Is this fighting with fzf?
-" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:vimrubocop_config = './.rubocop.yml'
 
 map <Leader>bi :! bundle install<CR><CR>
-map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-map <Leader>cp :%y+<CR>
 map <Leader>i mmgg=G`m<CR>
 map <Leader>mk :!mkdir -p %:p:h<CR><CR>
 map <Leader>o :!open .<CR><CR>
-map <Leader>p :set paste<CR>:r !pbpaste<cr>:set nopaste<cr>
+map <Leader>p :r !pbpaste<cr>
+map <Leader>cp :%y+<CR>
 map <Leader>re :w<CR>:!touch ./tmp/restart.txt<CR><CR>
 map <Leader>sp :setlocal spell! spelllang=en_us<CR>
 
@@ -204,9 +165,6 @@ map <Leader>ve :vsp ./
 "------------------------------------------------------------
 " Functions and Such
 
-" Stolen from 'More Instantly Better Vim' by Damian Conway
-" http://www.youtube.com/watch?v=aHm36-na4-4
-
 " Highlight the 120th character to identify long lines
 highlight ColorColumn ctermbg=blue
 call matchadd('ColorColumn','\%120v',100)
@@ -215,7 +173,7 @@ call matchadd('ColorColumn','\%120v',100)
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
 
-set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.DS_Store,*.db " Ignore these files, obviously
+set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.DS_Store,*.db
 
 " Automatically remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -223,19 +181,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 "------------------------------------------------------------
 " Mappings
 
-" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-" which is the default
+" Map Y to act like D and C, i.e. to yank until EOL
 map Y y$
 
 " Remap jk to leave insert mode
 imap jk <ESC>
-
-" Don't use the arrow keys
-" Oct 2025 - Removing these, cause I'm trained enough at this point
-" noremap <up>    :echoerr 'USE K TO GO UP'<CR>
-" noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
-" noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
-" noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
 
 " Clear last search highlight
 nnoremap <Space> :noh<cr>
