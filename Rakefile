@@ -6,7 +6,7 @@ task :install do |t, args|
   link_zsh_theme
   link_ghostty_config
   Dir['*'].each do |file|
-    next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme ghostty-config].include? file
+    next if %w[Rakefile README.md LICENSE id_dsa.pub miler.zsh-theme ghostty_config].include? file
 
     if File.exist?(File.join(ENV['HOME'], ".#{file}"))
       if replace_all
@@ -54,7 +54,7 @@ def link_zsh_theme
 end
 
 def link_ghostty_config
-  ghostty_dir = File.join(ENV['HOME'], 'Library', 'Application Support', 'com.mitchellh.ghostty')
+  ghostty_dir = File.join(ENV['HOME'], '.config', 'ghostty')
   ghostty_config = File.join(ghostty_dir, 'config')
 
   unless Dir.exist?(ghostty_dir)
@@ -68,5 +68,5 @@ def link_ghostty_config
   end
 
   puts "linking ghostty config"
-  system %Q{ln -s "$PWD/ghostty-config" "#{ghostty_config}"}
+  system %Q{ln -s "$PWD/ghostty_config" "#{ghostty_config}"}
 end

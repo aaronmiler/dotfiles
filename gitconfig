@@ -1,0 +1,43 @@
+[user]
+  email = aaron@aaronmiler.com
+  name = Aaron Miler
+[core]
+  excludesfile = ~/.gitignore
+  pager = delta
+[init]
+  defaultBranch = main
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    width = variable
+    line-numbers = true
+
+[merge]
+    conflictStyle = zdiff3
+
+[push]
+    autoSetupRemote = true
+
+[pull]
+    rebase = true
+
+[fetch]
+    prune = true
+
+[rebase]
+    autoStash = true
+    autoSquash = true
+
+[rerere]
+    enabled = true
+
+[branch]
+    sort = -committerdate
+
+[column]
+    ui = auto
+
+[diff]
+    algorithm = histogram
+    colorMoved = default

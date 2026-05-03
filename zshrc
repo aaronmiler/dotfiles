@@ -65,32 +65,6 @@ if which rbenv &> /dev/null; then
   eval "$(rbenv init -)"
 fi
 
-# NVM
-if which nvm &> /dev/null; then
-  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-  autoload -U add-zsh-hook
-  load-nvmrc() {
-    local node_version="$(nvm version)"
-    local nvmrc_path="$(nvm_find_nvmrc)"
-
-    if [ -n "$nvmrc_path" ]; then
-      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-      if [ "$nvmrc_node_version" = "N/A" ]; then
-        nvm install
-      elif [ "$nvmrc_node_version" != "$node_version" ]; then
-        nvm use
-      fi
-    elif [ "$node_version" != "$(nvm version default)" ]; then
-      echo "Reverting to nvm default version"
-      nvm use default
-    fi
-  }
-  add-zsh-hook chpwd load-nvmrc
-  load-nvmrc
-fi
 
 # Startup
 if ! ssh-add -l &> /dev/null; then
@@ -124,7 +98,6 @@ compdef _cop cop
 
 # Rails Shortcuts
 alias rc='bundle exec rails console'
-alias rcp'rails console production'
 alias ogh='hub browse -- ""'
 alias res='touch ./tmp/restart.txt'
 
@@ -191,13 +164,6 @@ function gclean() {
   fi
 }
 
-function gpurge() {
-  read "REPLY?Remove all branches but master?"
-  if [[$REPLY =! ^[Yy]$ ]]
-  then
-    git branch | egrep -v "(master|\*)" | xargs git branch -d
-  fi
-}
 
 function dconsole() {
   docker exec -it `docker ps --format "{{.ID}}" --filter name="$1"` bundle exec rails console
@@ -242,7 +208,7 @@ function gcm {
 
 # Search down for file
 function search(){
-  find ./ -name '[$1]*'
+  find . -name "*$1*"
 }
 
 function status(){
@@ -331,8 +297,29 @@ alias vgs="dc exec cli vgs"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
