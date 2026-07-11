@@ -2,7 +2,7 @@
   email = aaron@aaronmiler.com
   name = Aaron Miler
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
   pager = delta
 [init]
   defaultBranch = main
