@@ -12,6 +12,9 @@ brew "gh"
 brew "git-delta"
 brew "mise"
 brew "ripgrep"
+brew "jq"
+brew "sd"
+brew "fd"
 
 # --- Dev ---
 brew "awscli"
