@@ -171,8 +171,15 @@ function gphof(){
 function gplo(){
   git pull origin `branch`
 }
+# Inline for simple messages (no quotes needed); bare `gcm` prompts and takes
+# the message raw — no escaping of ! ' ( ) ever
 function gcm {
-  git commit -m "$*"
+  local msg="$*"
+  if [[ -z "$msg" ]]; then
+    read -r "msg?commit message: " || return 1
+    [[ -z "$msg" ]] && return 1
+  fi
+  git commit -m "$msg"
   echo 'Push it!'
 }
 
