@@ -11,18 +11,9 @@ plugins=(sublime bundler gem)
 autoload -Uz compinit
 compinit
 
-# Example aliases
-# alias zshconfig='mate ~/.zshrc'
-# alias ohmyzsh='mate ~/.oh-my-zsh'
-
 export UPDATE_ZSH_DAYS=7
 
 COMPLETION_WAITING_DOTS='true'
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY='true'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -31,39 +22,20 @@ stty -ixon
 
 ## Exports
 #---------------
-#Heroku
-export PATH="/usr/local/heroku/bin:$PATH"
-
-
-# NPM Bin Path
-export PATH=/usr/local/share/bin/npm:$PATH
-
-# All the Paths!
-export PATH=/usr/local/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 
 # Make sure Brew comes before others
-export PATH="/usr/local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 
 # Get Postgres
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/postgresql@17/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/postgresql@17/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@17/lib/pkgconfig"
 
 # Make Cask install in /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export TERM=xterm-256color
 
-# RB Env
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="/opt/cloud66/bin:${PATH}"
 
-if which rbenv &> /dev/null; then
-  eval "$(rbenv init -)"
-fi
+eval "$(mise activate zsh)"
 
 
 # Startup
@@ -98,7 +70,11 @@ compdef _cop cop
 
 # Rails Shortcuts
 alias rc='bundle exec rails console'
-alias ogh='hub browse -- ""'
+# Open GitHub in the browser on the current branch
+function ogh() {
+  local url=$(git remote get-url origin | sed -e 's#^git@github.com:#https://github.com/#' -e 's#\.git$##')
+  open "$url/tree/$(branch)"
+}
 alias res='touch ./tmp/restart.txt'
 
 function newapp() {
@@ -295,37 +271,3 @@ alias vgs="dc exec cli vgs"
 # -----------------------------------------
 
 export PATH="$HOME/.yarn/bin:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/readline/lib/pkgconfig"
-export optflags="-Wno-error=implicit-function-declaration"
-export LDFLAGS="-L/opt/homebrew/opt/libffi/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libffi/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libffi/lib/pkgconfig"
