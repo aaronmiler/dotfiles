@@ -34,6 +34,7 @@ new file to the repo.
 | `vimrc` / `vim/` | Vim config; plugins via vim-plug (auto-installs itself) |
 | `ghostty_config` | Terminal (`~/.config/ghostty/config`) |
 | `gitconfig` / `gitignore` | Git config + global excludes |
+| `claude/` | Claude Code global instructions + shared skill files (`~/.claude`) |
 
 ## Conventions
 
@@ -43,3 +44,8 @@ new file to the repo.
   and start breaking installs).
 - Vim registers and the system clipboard stay separate by design; `<Leader>p` /
   `<Leader>cp` are the explicit bridges.
+- Claude Code config is split: `claude/CLAUDE.md` is the shared base and imports
+  `~/.claude/CLAUDE.local.md` for per-machine rules (homelab here, work conventions
+  at work). Shared skills symlink in per-file, so machine-local skills live alongside
+  them unversioned. `settings.json` is deliberately not versioned — its env block
+  can hold API keys.
