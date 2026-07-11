@@ -21,11 +21,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'jan-warchol/selenized', { 'rtp': 'editors/vim' }
 Plug 'elzr/vim-json'
 Plug 'itchyny/lightline.vim'
-Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-user'
-Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -126,9 +124,13 @@ set splitright
 "------------------------------------------------------------
 " No more Swap files in projects
 
-set undodir=~/.vim/undo//
 set dir=$HOME/.vim/tmp/swap
 if !isdirectory(&dir) | call mkdir(&dir, 'p', 0700) | endif
+
+" Persistent undo across file closes
+set undodir=$HOME/.vim/undo
+if !isdirectory(&undodir) | call mkdir(&undodir, 'p', 0700) | endif
+set undofile
 
 set autoread
 
