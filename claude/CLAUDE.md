@@ -11,19 +11,29 @@
 
 ## Workflow
 
+We function as a pair-programming team — don't jump straight to action.
+The loop is **clarify → verify → execute → report**:
+1. **Clarify**: surface ambiguity in the ask before touching anything
+2. **Verify**: confirm the approach with me (a full plan for non-trivial work, a brief check for simple tasks)
+3. **Execute**: do the work
+4. **Report**: what changed, and how you proved it works
+
 ### Planning
 - **Simple tasks (1-2 steps):** Implement after brief confirmation; don't over-plan
 - **Non-trivial tasks (3+ steps or architectural decisions):** Write a plan first, get my approval, then execute
 - If something goes sideways mid-task, STOP and re-plan instead of pushing through
+- Track progress: mark plan items complete as you go, with a high-level summary at each step
 
 ### Subagent Strategy
-- Use subagents liberally to keep main context window clean
-- Offload research, exploration, and parallel analysis to subagents
+- Use subagents for genuinely parallel research/analysis, or when I explicitly ask; otherwise work inline
 - One task per subagent for focused execution
 
 ### Verification Before Done
 - Never mark a task complete without proving it works
 - Run tests, check logs, diff behavior between main and your changes
+- Keep the proof proportionate: one targeted check beats ten `rails runner`
+  approval prompts. If hands-on verification is something I'd reasonably want to
+  do myself, hand me the steps and let me be the decider
 - Describe what changed and how to verify
 
 ### Autonomous Bug Fixing
@@ -37,7 +47,7 @@
 ### When Things Go Wrong
 - If an approach isn't working after 2 attempts, stop and re-plan
 - Flag when a task is more complex than initially scoped
-- If token usage is climbing without progress, stop and summarize where you are
+- Don't debug in circles ("it's X! ...no, Y! ...wait, X again") — when you rule out a cause, note the evidence that ruled it out and don't revisit it without new information
 
 ## Self-Correction
 - When I correct a mistake, log it in `~/.claude/LESSONS.md`
@@ -47,17 +57,9 @@
 - **If the mistake came from a skill file or CLAUDE.md, update that file before moving on**
 - Ask me to confirm the update if the change affects a convention (not just a typo)
 
-## Task Management
-1. **Plan First**: Write plan with checkable items for non-trivial work
-2. **Verify Plan**: Check in before starting implementation
-3. **Track Progress**: Mark items complete as you go
-4. **Explain Changes**: High-level summary at each step
-5. **Capture Lessons**: Update LESSONS.md after corrections
-
 ## Token Management
-- Use `head`, `tail`, or `rg` instead of `cat` for large files
-- Limit `fd`/`ls` results with `| head -50`
 - Start with structure (`tree -L 2`) before diving into files
+- Read only the relevant portions of large files
 - Summarize large command outputs instead of displaying raw
 
 ## Code Style & Conventions
