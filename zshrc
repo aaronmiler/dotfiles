@@ -8,14 +8,14 @@ EDITOR="vim"
 # Plugins
 plugins=(sublime bundler gem)
 
-autoload -Uz compinit
-compinit
-
 export UPDATE_ZSH_DAYS=7
 
 COMPLETION_WAITING_DOTS='true'
 
 source $ZSH/oh-my-zsh.sh
+
+# sublime plugin's `st` alias collides with gst typos; keep subl only
+unalias st 2>/dev/null
 
 # Putting these here so I can Control-S to save in vim
 stty -ixon
@@ -38,11 +38,10 @@ export PATH="/opt/cloud66/bin:${PATH}"
 eval "$(mise activate zsh)"
 
 
-# Startup
+# Startup: load SSH key into the agent (prompts for passphrase once per boot,
+# cached in the agent only — not stored in the OS keychain)
 if ! ssh-add -l &> /dev/null; then
-  echo "****************************"
-  echo "SSH Key not added"
-  echo "****************************"
+  ssh-add ~/.ssh/id_rsa 2> /dev/null || echo "SSH key not loaded — run: ssh-add ~/.ssh/id_rsa"
 fi
 
 bindkey "^C" send-break
@@ -107,8 +106,8 @@ alias gst='git status -sb'
 alias gstm='git status --porcelain | grep "^UU"'
 alias gcma='git commit -C HEAD --amend'
 alias gcof='git checkout HEAD --'
-alias gcom='git checkout $(mainBranch); git pull origin $(mainBranch)'
-alias grhh='git reset --hard head'
+alias gcom='git checkout $(mainBranch) && git pull origin $(mainBranch)'
+alias grhh='git reset --hard HEAD'
 alias gplom='git pull origin $(mainBranch)'
 alias gprom='git pull --rebase origin $(mainBranch)'
 alias gignore='git rm -r --cached . && git add .'
@@ -149,8 +148,7 @@ function dconsole() {
 # Tools
 # -----------------------------------------
 
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-  [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # -----------------------------------------
 # Functions for logging git activity
@@ -228,9 +226,16 @@ function sites(){
   cd ~/Documents/Projects/Sites/$1
 }
 
+# Tab-complete the project-jump functions with their directories
+compdef '_files -W ~/Documents/Pineworks -/' pw
+compdef '_files -W ~/Documents/Projects -/' personal
+compdef '_files -W ~/Documents/Notes -/' notes
+compdef '_files -W ~/Documents/Projects/Sites -/' sites
+compdef '_files -W ~/Documents/Work -/' work
+
 # Where my work projects go
 function work(){
-  cd ~/Documents/Work/$1
+  cd ~/Documents/Work/$1 || return
   if [ $1 ]; then
     git fetch origin
   fi
@@ -271,3 +276,6 @@ alias vgs="dc exec cli vgs"
 # -----------------------------------------
 
 export PATH="$HOME/.yarn/bin:$PATH"
+
+# Dedupe PATH (runs last so it catches everything above; keeps rerc from stacking entries)
+typeset -U path
