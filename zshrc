@@ -37,13 +37,6 @@ export PATH="/opt/cloud66/bin:${PATH}"
 
 eval "$(mise activate zsh)"
 
-
-# Startup: load SSH key into the agent (prompts for passphrase once per boot,
-# cached in the agent only — not stored in the OS keychain)
-if ! ssh-add -l &> /dev/null; then
-  ssh-add ~/.ssh/id_rsa 2> /dev/null || echo "SSH key not loaded — run: ssh-add ~/.ssh/id_rsa"
-fi
-
 bindkey "^C" send-break
 
 # My Aliases
@@ -286,3 +279,10 @@ export PATH="$HOME/.yarn/bin:$PATH"
 
 # Dedupe PATH (runs last so it catches everything above; keeps rerc from stacking entries)
 typeset -U path
+
+# Load SSH key into the agent (prompts for passphrase once per boot, cached in
+# the agent only — not stored in the OS keychain). Kept last: if the passphrase
+# prompt is aborted (Ctrl-C), everything above has already been defined.
+if ! ssh-add -l &> /dev/null; then
+  ssh-add ~/.ssh/id_rsa 2> /dev/null || echo "SSH key not loaded — run: ssh-add ~/.ssh/id_rsa"
+fi
