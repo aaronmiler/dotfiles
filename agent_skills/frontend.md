@@ -1,3 +1,8 @@
+---
+name: frontend
+description: TypeScript + React conventions — functional components/hooks, frontend/ layout, in-component code order, prop interfaces, export style. Load when working in React/TypeScript frontend code.
+---
+
 # TypeScript + React Conventions
 
 ## Structure

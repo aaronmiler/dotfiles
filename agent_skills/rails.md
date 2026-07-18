@@ -1,3 +1,8 @@
+---
+name: rails
+description: Ruby on Rails conventions — REST, service objects, thin controllers, Sidekiq, strong migrations, and running rails commands via docker compose exec. Load when working in a Rails codebase.
+---
+
 # Rails Conventions
 
 ## General

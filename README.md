@@ -34,7 +34,9 @@ new file to the repo.
 | `vimrc` / `vim/` | Vim config; plugins via vim-plug (auto-installs itself) |
 | `ghostty_config` | Terminal (`~/.config/ghostty/config`) |
 | `gitconfig` / `gitignore` | Git config + global excludes |
-| `claude/` | Claude Code global instructions + shared skill files (`~/.claude`) |
+| `claude/` | Claude Code global instructions (`CLAUDE.md` → `~/.claude`) |
+| `doug/` | doug global instructions (`DOUG.md` → `~/.doug`); profile/settings/auth stay local |
+| `agent_skills/` | Shared skill files (rails/frontend/testing), symlinked into both `~/.claude/skills` and `~/.doug/skills` |
 
 ## Conventions
 
@@ -46,6 +48,11 @@ new file to the repo.
   `<Leader>cp` are the explicit bridges.
 - Claude Code config is split: `claude/CLAUDE.md` is the shared base and imports
   `~/.claude/CLAUDE.local.md` for per-machine rules (homelab here, work conventions
-  at work). Shared skills symlink in per-file, so machine-local skills live alongside
-  them unversioned. `settings.json` is deliberately not versioned — its env block
-  can hold API keys.
+  at work). `settings.json` is deliberately not versioned — its env block can hold
+  API keys.
+- `agent_skills/` is one core set of skill files shared across agents: `install.sh`
+  symlinks each into both `~/.claude/skills` and `~/.doug/skills`. They carry
+  `name`/`description` frontmatter (doug's loader requires it; harmless to Claude's
+  path references). Linked per-file, so machine-local skills (cascadia, tars) live
+  alongside them unversioned. doug auto-loads `~/.doug/skills` — no settings change
+  needed.

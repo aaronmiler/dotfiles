@@ -1,3 +1,8 @@
+---
+name: testing
+description: Testing conventions — what to test (behavior over implementation), RSpec/FactoryBot for Rails, colocated frontend tests, and verifying suites via logs rather than running them. Load when writing or reviewing tests.
+---
+
 # Testing Conventions
 
 ## General

@@ -78,6 +78,14 @@ The loop is **clarify → verify → execute → report**:
 ## Git Usage
 Never perform mutative git operations (branch, commit, etc)
 
+## Installing Software
+- NEVER install anything on my machine — installing is my decision, every time
+- This covers package managers (npm/brew/gem/pip), installers/install scripts,
+  and symlinking or copying binaries into PATH — anything that lands outside
+  the project directory
+- No exception for tools we're building together: build the tooling, then hand
+  me the install command and let me run it (at minimum, prompt me first)
+
 ## Installed CLI tools
 
 - **ripgrep** (`rg`) is installed — prefer over `grep` for shell searches
