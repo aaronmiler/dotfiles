@@ -1,3 +1,20 @@
 font-family = "Hack"
 theme = dark:iTerm2 Solarized Dark,light:iTerm2 Solarized Light
 shell-integration-features = no-cursor,no-sudo,no-title
+
+# Rename the current tab (persistent override, survives split focus + program titles)
+keybind = cmd+shift+t=prompt_tab_title
+
+# Dim inactive splits harder so the focused one is obvious
+unfocused-split-opacity = 0.5
+
+# Split navigation on cmd+shift+arrows, all four directions (vertical splits too).
+keybind = cmd+shift+left=goto_split:left
+keybind = cmd+shift+right=goto_split:right
+keybind = cmd+shift+up=goto_split:up
+keybind = cmd+shift+down=goto_split:down
+
+# Prompt-by-prompt jump, relocated off cmd+shift+up/down (now split nav) to
+# cmd+opt+up/down — reclaimed from the redundant cmd+opt vertical split nav.
+keybind = opt+up=jump_to_prompt:-1
+keybind = opt+down=jump_to_prompt:1
