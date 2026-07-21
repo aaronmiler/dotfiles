@@ -1,9 +1,6 @@
 "------------------------------------------------------------
 " Features
 "
-let &t_TI = ""
-let &t_TE = ""
-
 :runtime macros/matchit.vim
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -18,7 +15,7 @@ endif
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'jan-warchol/selenized', { 'rtp': 'editors/vim' }
+Plug 'altercation/vim-colors-solarized'
 Plug 'elzr/vim-json'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -137,8 +134,12 @@ set autoread
 "-----------------------------------------------------------
 " Colors!
 
-set termguicolors
-colorscheme selenized
+" No termguicolors: this plugin predates it and only emits real colors via
+" ANSI slots. ghostty's iTerm2 Solarized Dark puts a lighter tone in slot 8
+" instead of base03, so termtrans lets Normal show the terminal's own (correct)
+" background rather than that mismatched slot. background is auto-detected.
+let g:solarized_termtrans = 1
+colorscheme solarized
 
 "-----------------------------------------------------------
 " Leader
