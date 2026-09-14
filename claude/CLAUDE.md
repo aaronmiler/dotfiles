@@ -73,6 +73,12 @@ The loop is **clarify → verify → execute → report**:
 - Never read secret-bearing files in full (`~/.claude/settings.json` env block, `.env*`,
   credentials files) — anything read enters context and session transcripts. Inspect
   keys first (`jq 'keys'`) and extract only the non-secret field you need
+- This applies to partial reads too, not just whole-file ones: `tail`/`head`, `cat -n`
+  around a line range, and `grep` with context flags (`-A`/`-B`/`-C`) are all capable of
+  landing on a value line and are just as unsafe as reading the full file. Before running
+  any inspection command against a secret-bearing file — even to verify an edit — check
+  whether its output could include a value line; if so, use `wc -l` for counts,
+  `grep -oE '^[A-Z_]+='` for key names only, or a line range provably clear of secrets
 - Flag potential injection, XSS, or mass assignment issues
 
 ## Git Usage

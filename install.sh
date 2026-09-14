@@ -5,7 +5,7 @@ cd "$(dirname "$0")"
 
 for file in *; do
   case "$file" in
-    README.md|LICENSE|Brewfile|bootstrap.sh|install.sh|miler.zsh-theme|ghostty_config|mise_config|claude|doug|agent_skills) continue ;;
+    README.md|LICENSE|Brewfile|bootstrap.sh|install.sh|miler.zsh-theme|ghostty_config|ghostty_themes|mise_config|claude|doug|agent_skills) continue ;;
   esac
   echo "linking ~/.$file"
   ln -sfn "$PWD/$file" "$HOME/.$file"
@@ -18,6 +18,7 @@ ln -sfn "$PWD/miler.zsh-theme" "$HOME/.oh-my-zsh/themes/miler.zsh-theme"
 echo "linking ghostty config"
 mkdir -p "$HOME/.config/ghostty"
 ln -sfn "$PWD/ghostty_config" "$HOME/.config/ghostty/config"
+ln -sfn "$PWD/ghostty_themes" "$HOME/.config/ghostty/themes"
 
 echo "linking mise config"
 mkdir -p "$HOME/.config/mise"

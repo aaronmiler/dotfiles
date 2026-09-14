@@ -42,3 +42,5 @@ Gemfile.local
 Gemfile.local.lock
 
 Procfile.local
+
+**/.claude/settings.local.json

@@ -134,12 +134,10 @@ set autoread
 "-----------------------------------------------------------
 " Colors!
 
-" No termguicolors: this plugin predates it and only emits real colors via
-" ANSI slots. ghostty's iTerm2 Solarized Dark puts a lighter tone in slot 8
-" instead of base03, so termtrans lets Normal show the terminal's own (correct)
-" background rather than that mismatched slot. background is auto-detected.
-let g:solarized_termtrans = 1
-colorscheme solarized
+" cterm-only, no termguicolors: colors come from whichever Ghostty theme is
+" active (Trillium Dark / Trillium Light — see ghostty_themes/), not from hex
+" values in the colorscheme itself. background is auto-detected.
+colorscheme trillium
 
 "-----------------------------------------------------------
 " Leader
