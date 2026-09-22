@@ -35,6 +35,10 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 export PATH="/opt/cloud66/bin:${PATH}"
 
+if which direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
 eval "$(mise activate zsh)"
 
 bindkey "^C" send-break

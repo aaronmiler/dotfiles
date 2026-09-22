@@ -4,7 +4,7 @@ prompt_setup_miler(){
   ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}"
   ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
   ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}⚡%{$reset_color%}"
-  ZSH_THEME_GIT_PROMPT_CLEAN="🍺"
+  ZSH_THEME_GIT_PROMPT_CLEAN="🥃"
 
   if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     NAME_COLOR=magenta
@@ -33,7 +33,7 @@ prompt_miler_precmd(){
   fi
 
   if which node &> /dev/null; then
-    node='%{$fg[blue]%}N:$(node --version)%{$reset_color%}'
+    node='%{$fg[blue]%}N:$(node --version | sed -e "s/ (set.*$//")%{$reset_color%}'
   fi
 
 
